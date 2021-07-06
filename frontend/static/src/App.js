@@ -1,15 +1,16 @@
-import { Component } from 'react';
+  import { Component } from 'react';
 import './App.css';
 import Cookies from 'js-cookie';
 import Registration from './registration';
 import Login from './login';
-import Profile from './profile';
+import Homepage from './homepage';
+import Button from 'react-bootstrap/Button';
 
 class App extends Component{
   constructor(props) {
     super(props);
       this.state = {
-        selection: !! Cookies.get('Authorization') ? 'profile' : 'login'
+        selection: !! Cookies.get('Authorization') ? 'homepage' : 'login'
       }
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
@@ -34,7 +35,7 @@ class App extends Component{
   if(response.ok){
     const data = await response.json().catch(handleError);
     Cookies.set('Authorization', `Token ${data.key}`);
-    this.setState({ selection : 'profile' });
+    this.setState({ selection : 'homepage' });
   }
 }
 
@@ -55,7 +56,7 @@ async handleRegistration(user){
     const data = await response.json().catch(handleError);
 
     Cookies.set('Authorization', `Token ${data.key}`);
-    this.setState({ selection : 'profile'});
+    this.setState({ selection : 'homepage'});
   }
 }
 
@@ -87,8 +88,8 @@ async handleLogout(){
     <>
     {this.state.selection === 'login' && <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>}
     {this.state.selection === 'register' && <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>}
-    {this.state.selection === 'profile' && <Profile handleLogout={this.handleLogout}/>}
-    {this.state.selection === 'profile' && <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>}
+    {this.state.selection === 'homepage' && <Homepage handleLogout={this.handleLogout}/>}
+    {this.state.selection === 'homepage' && <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>}
     </>
   );
 }
