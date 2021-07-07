@@ -8,7 +8,7 @@ class EditIngredient extends Component {
       isEditing: false,
       ingredient: this.props.ingredient.ingredient,
     }
-    this.editingredient = this.editingredient.bind(this);
+    this.editIngredient = this.editIngredient.bind(this);
     this.inputIngredient = this.inputIngredient.bind(this);
   }
 
