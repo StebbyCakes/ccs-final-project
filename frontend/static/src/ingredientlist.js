@@ -41,7 +41,7 @@ class IngredientList extends Component {
         },
       }
 
-      fetch(`/api/v1/ingredient/${id}`, options)
+      fetch(`/api/v1/ingredients/${id}`, options)
         .then(response => {
           const ingredients = [ ...this.state.ingredients ];
           const index = ingredients.findIndex(ingredient => ingredient.id === id);

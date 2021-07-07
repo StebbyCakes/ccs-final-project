@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import Registration from './registration';
 import Login from './login';
 import IngredientList from './ingredientlist';
-import Button from 'react-bootstrap/Button';
+
 
 class App extends Component{
   constructor(props) {

@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 class CreateIngredient extends Component {
   constructor(props){
     super(props);
-    this.state ={
+    this.state = {
       ingredients: '',
     }
     this.submitIngredient = this.submitIngredient.bind(this);

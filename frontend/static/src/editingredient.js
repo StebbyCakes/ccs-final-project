@@ -34,12 +34,11 @@ render() {
     {
       this.state.isEditing
       ? <button className="edit-ingredient" type='button' onClick={this.editIngredient}>Save Edit</button>
-      : ingredient.has_owner_permissions && <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>EDIT</button>
+      : <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>EDIT</button>
     }
-    {ingredient.has_owner_permissions && <button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
+    {<button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
     </li>
-  )
-}
+  )}
 }
 
 export default EditIngredient;
