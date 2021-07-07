@@ -3,7 +3,7 @@ import { Component } from 'react';
 class Api extends Component{
 
   componentDidMount() {
-    fetch('https:api.spoonacular.com/food/ingredients/search?query=banana&number=2&sort=calories&sortDirection=desc?apiKey=7f40aaf07d494a74910b1ac4fcff7357')
+    fetch('https:api.spoonacular.com/food/ingredients/search?query=banana&number=2&sort=calories&sortDirection=desc?apiKey='enterapikeyhere')
 
     .then(response => {
       if (!response.ok){
