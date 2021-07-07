@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
     'frontend.apps.FrontendConfig',
-    'ingredient.apps.IngredientConfig',
+    'ingredients.apps.IngredientsConfig',
 ]
 
 REST_FRAMEWORK = {

@@ -1,4 +1,4 @@
-import ( Component ) from 'react';
+import {Component} from 'react';
 import Cookies from 'js-cookie';
 
 class CreateIngredient extends Component {
@@ -24,7 +24,7 @@ class CreateIngredient extends Component {
       },
       body: JSON.stringify(newSubmit),
     }
-    fetch('/api/v1/ingredient/', options)
+    fetch('/api/v1/ingredients/', options)
       .then(response => response.json());
 
     this.setState({ ingredients: '' });
@@ -37,7 +37,7 @@ class CreateIngredient extends Component {
   render(){
     return(
       <form onSubmit={this.submitIngredient}>
-        <textarea className='ingredient-submit' name='ingredients' value={this.state.ingredients} placeholder="Enter a new Ingredient" onChange={this.inputIngredient}></textarea>
+        <input className='ingredient-submit' name='ingredients' value={this.state.ingredients} placeholder="Enter a new Ingredient" onChange={this.inputIngredient}></input>
         <button className='button' type='submit'>Add to List</button>
       </form>
     )}

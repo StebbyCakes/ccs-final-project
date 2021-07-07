@@ -36,7 +36,7 @@ render() {
       ? <button className="edit-ingredient" type='button' onClick={this.editIngredient}>Save Edit</button>
       : ingredient.has_owner_permissions && <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>EDIT</button>
     }
-    {message.has_owner_permissions && <button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
+    {ingredient.has_owner_permissions && <button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
     </li>
   )
 }
