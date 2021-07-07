@@ -1,4 +1,4 @@
-  import { Component } from 'react';
+import { Component } from 'react';
 import './App.css';
 import Cookies from 'js-cookie';
 import Registration from './registration';
