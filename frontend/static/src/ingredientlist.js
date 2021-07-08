@@ -12,6 +12,7 @@ class IngredientList extends Component {
     this.deleteIngredient = this.deleteIngredient.bind(this);
     this.editIngredient = this.editIngredient.bind(this);
     this.fetchData = this.fetchData.bind(this);
+    this.addIngredient = this.addIngredient.bind(this);
   }
   componentDidMount() {
       this.retrieveIngredients = setInterval(this.fetchData, 500)
@@ -53,6 +54,30 @@ class IngredientList extends Component {
         });
     }
 
+    addIngredient(ingredient) {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': Cookies.get('csrftoken'),
+        },
+        body: JSON.stringify(ingredient),
+      }
+      fetch('/api/v1/ingredients/', options)
+        .then(response => {
+          if(!response.ok) {
+            throw new Error('Network response was not ok');
+            // handle the error
+          }
+          return response.json();
+        })
+        .then(data => {
+          const ingredients = [...this.state.ingredients, data];
+          this.setState({ingredients});
+        })
+        .catch()
+    }
+
     editIngredient(ingredient) {
       const id = ingredient.id;
       const options = {
@@ -84,7 +109,7 @@ class IngredientList extends Component {
           <div className="ingredient-list">
             <ul>{displayIngredients}</ul>
               <section>
-                <CreateIngredient/>
+                <CreateIngredient addIngredient={this.addIngredient}/>
               </section>
           </div>
           </>

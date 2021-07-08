@@ -5,7 +5,7 @@ class CreateIngredient extends Component {
   constructor(props){
     super(props);
     this.state = {
-      ingredients: '',
+      ingredient: '',
     }
     this.submitIngredient = this.submitIngredient.bind(this);
     this.inputIngredient = this.inputIngredient.bind(this);
@@ -13,21 +13,13 @@ class CreateIngredient extends Component {
 
   submitIngredient(event) {
     event.preventDefault();
-    const newSubmit = {
-      ingredient: this.state.ingredients,
-    }
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': Cookies.get('csrftoken'),
-      },
-      body: JSON.stringify(newSubmit),
-    }
-    fetch('/api/v1/ingredients/', options)
-      .then(response => response.json());
 
-    this.setState({ ingredients: '' });
+    const ingredient = {
+      ingredient: this.state.ingredient,
+    };
+
+    this.props.addIngredient(ingredient);
+    this.setState({ ingredient: '' });
   }
 
   inputIngredient(event) {
@@ -37,7 +29,7 @@ class CreateIngredient extends Component {
   render(){
     return(
       <form onSubmit={this.submitIngredient}>
-        <input className='ingredient-submit' name='ingredients' value={this.state.ingredients} placeholder="Enter a new Ingredient" onChange={this.inputIngredient}></input>
+        <input className='ingredient-submit' name='ingredient' value={this.state.ingredient} placeholder="Enter a new Ingredient" onChange={this.inputIngredient}></input>
         <button className='button' type='submit'>Add to List</button>
       </form>
     )}

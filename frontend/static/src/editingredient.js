@@ -36,8 +36,7 @@ render() {
       ? <button className="edit-ingredient" type='button' onClick={this.editIngredient}>Save Edit</button>
       : <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>EDIT</button>
     }
-    {
-      <button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
+    {<button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
     </li>
   )}
 }
