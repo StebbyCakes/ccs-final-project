@@ -4,5 +4,6 @@ app_name = 'api_v1'
 
 urlpatterns = [
     path('ingredients/', include('ingredients.urls', namespace='ingredients')),
-     path('users/', include('accounts.urls')),
+    path('menuitems/', include('menuitems.urls', namespace='menuitems')),
+    path('users/', include('accounts.urls')),
 ]
