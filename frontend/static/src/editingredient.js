@@ -29,7 +29,7 @@ render() {
     {
       this.state.isEditing
       ? <input type="text" name='ingredient' value={this.state.ingredient} onChange={this.inputIngredient}></input>
-      : <p>{ingredient.ingredient}</p>
+      : <p>{ingredient.name}</p>
     }
     {
       this.state.isEditing
