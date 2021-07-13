@@ -79,8 +79,7 @@ class IngredientList extends Component {
         .catch()
     }
 
-    editIngredient(ingredient) {
-      const id = ingredient.id;
+    editIngredient(id, ingredient) {
       const options = {
         method: 'PUT',
         headers: {
@@ -102,6 +101,7 @@ class IngredientList extends Component {
     }
 
     render() {
+
       const displayIngredients = this.state.ingredients.map((ingredient) => (
         <EditIngredient key={ingredient.id} ingredient={ingredient} deleteIngredient={this.deleteIngredient} editIngredient={this.editIngredient} />
       ));

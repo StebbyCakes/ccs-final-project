@@ -39,7 +39,7 @@ render() {
           <input type="text" name='price_per_pound' value={this.state.price_per_pound} onChange={this.inputIngredient} />
         </>
 
-      : <p>{ingredient.name}</p>
+      : <p>{ingredient.name, ingredient.price_per_pound}</p>
     }
     {
       this.state.isEditing

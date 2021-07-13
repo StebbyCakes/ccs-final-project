@@ -7,7 +7,7 @@ class EditIngredient extends Component {
     this.state = {
       isEditing: false,
       name: this.props.ingredient.name,
-      price: this.props.ingredient.price_per_pound,
+      price_per_pound: this.props.ingredient.price_per_pound,
     }
     this.editIngredient = this.editIngredient.bind(this);
     this.inputIngredient = this.inputIngredient.bind(this);
@@ -17,11 +17,12 @@ editIngredient() {
   this.setState({ isEditing: false});
 
   const ingredient = {
-    name: this.state.ingredient,
+    name: this.state.name,
     price_per_pound: this.state.price_per_pound
   }
 
-  this.props.editIngredient(ingredient);
+  const id = this.props.ingredient.id;
+  this.props.editIngredient(id, ingredient);
 }
 
 inputIngredient(event){
@@ -33,7 +34,7 @@ render() {
     <li className='list'>
     {
       this.state.isEditing
-      ? 
+      ?
         <>
           <input type="text" name='name' value={this.state.name} onChange={this.inputIngredient} />
           <input type="text" name='price_per_pound' value={this.state.price_per_pound} onChange={this.inputIngredient} />
