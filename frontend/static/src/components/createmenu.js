@@ -15,6 +15,7 @@ class CreateMenuItem extends Component {
   submitMenuItem(event) {
     event.preventDefault();
 
+    const menuitem = {...this.state};
     this.props.addMenuItem(menuitem);
     this.setState({ name: '' });
   }
@@ -32,4 +33,4 @@ class CreateMenuItem extends Component {
     )}
 }
 
-export default CreateMenuItem
+export default CreateMenuItem;

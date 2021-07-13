@@ -1,54 +1,52 @@
 import { Component } from 'react';
 import Cookies from 'js-cookie';
 
-class EditIngredient extends Component {
+class EditMenuItem extends Component {
   constructor(props){
     super(props)
     this.state = {
       isEditing: false,
-      name: this.props.ingredient.name,
-      price: this.props.ingredient.price_per_pound,
+      name: this.props.menuitem.name,
     }
-    this.editIngredient = this.editIngredient.bind(this);
-    this.inputIngredient = this.inputIngredient.bind(this);
+    this.editMenuItem = this.editMenuItem.bind(this);
+    this.inputMenuItem = this.inputMenuItem.bind(this);
   }
 
-editIngredient() {
+editMenuItem() {
   this.setState({ isEditing: false});
 
-  const ingredient = {
-    name: this.state.ingredient,
-    price_per_pound: this.state.price_per_pound
+  const menuitem = {
+    name: this.state.name,
   }
 
-  this.props.editIngredient(ingredient);
+  const id = this.props.menuitem.id;
+  this.props.editMenuItem(id, menuitem);
 }
 
-inputIngredient(event){
+inputMenuItem(event){
   this.setState({ [event.target.name]:  event.target.value});
 }
 render() {
-  const ingredient = this.props.ingredient;
+  const menuitem = this.props.menuitem;
   return(
     <li className='list'>
     {
       this.state.isEditing
       ?
         <>
-          <input type="text" name='name' value={this.state.name} onChange={this.inputIngredient} />
-          <input type="text" name='price_per_pound' value={this.state.price_per_pound} onChange={this.inputIngredient} />
+          <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem} />
         </>
 
-      : <p>{ingredient.name, ingredient.price_per_pound}</p>
+      : <p>{menuitem.name}</p>
     }
     {
       this.state.isEditing
-      ? <button className="edit-ingredient" type='button' onClick={this.editIngredient}>Save Edit</button>
+      ? <button className="edit-menuitem" type='button' onClick={this.editMenuItem}>Save Edit</button>
       : <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>EDIT</button>
     }
-    {<button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
+    {<button className ="detail-button" type="button" onClick={() => this.props.deleteMenuItem(menuitem.id)}>DELETE</button>}
     </li>
   )}
 }
 
-export default EditIngredient;
+export default EditMenuItem;
