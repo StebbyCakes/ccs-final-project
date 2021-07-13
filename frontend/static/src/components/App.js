@@ -88,12 +88,12 @@ async handleLogout(){
   }
 }
 
+
   render(){
 
 
   return (
     <>
-    {this.state.selection === 'ingredientlist' && <IngredientList />}
     {this.state.selection === 'ingredientlist' && <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>}
 
     <Link to='/registration'>Registration</Link>
