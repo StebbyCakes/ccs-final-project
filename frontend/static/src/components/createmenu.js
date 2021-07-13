@@ -1,6 +1,5 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
-// import CreatePricePerPound from './createprice.js';
 
 class CreateMenuItem extends Component {
   constructor(props){
@@ -16,7 +15,7 @@ class CreateMenuItem extends Component {
   submitMenuItem(event) {
     event.preventDefault();
 
-    this.props.addIngredient(ingredient);
+    this.props.addMenuItem(menuitem);
     this.setState({ name: '' });
   }
 

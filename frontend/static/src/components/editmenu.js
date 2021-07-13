@@ -33,7 +33,7 @@ render() {
     <li className='list'>
     {
       this.state.isEditing
-      ? 
+      ?
         <>
           <input type="text" name='name' value={this.state.name} onChange={this.inputIngredient} />
           <input type="text" name='price_per_pound' value={this.state.price_per_pound} onChange={this.inputIngredient} />

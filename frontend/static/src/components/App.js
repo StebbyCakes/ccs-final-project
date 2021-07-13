@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import Registration from './registration';
 import Login from './login';
 import IngredientList from './ingredientlist';
+import Profile from './profile';
 
 
 class App extends Component{
