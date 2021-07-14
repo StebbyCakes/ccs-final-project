@@ -9,6 +9,9 @@ import MenuItemList from './menulist';
 import Homepage from './homepage';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+
 
 class App extends Component{
   constructor(props) {
@@ -87,14 +90,24 @@ async handleLogout(){
     this.props.history.push('/login')
   }
 }
-
+// {this.state.selection === 'ingredientlist' && <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>}
 
   render(){
 
 
   return (
     <>
-    {this.state.selection === 'ingredientlist' && <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>}
+
+    <Navbar className='navbar-links'>
+      <Nav className="nav-links">
+        <Link className="btn" to='/'>Homepage</Link>
+        <Link className="btn" to='/ingredientlist'>Ingredients</Link>
+        <Link className="btn" to='/menulist'>Menu</Link>
+        <Link className="btn" to='/profile'>Profile</Link>
+        <button type="button" className="btn" onClick={this.handleLogout}>Logout</button>
+      </Nav>
+   </Navbar>
+
 
     <Link to='/registration'>Registration</Link>
     <Link to='/login'>Login</Link>
