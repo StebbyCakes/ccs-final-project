@@ -8,7 +8,6 @@ import Profile from './profile';
 import MenuItemList from './menulist';
 import Homepage from './homepage';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
-
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -17,7 +16,7 @@ class App extends Component{
   constructor(props) {
     super(props);
       this.state = {
-        // selection: !! Cookies.get('Authorization') ? 'ingredientlist' : 'login'
+        // selection: !!Cookies.get('Authorization') ? 'ingredientlist' : 'login'
       }
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
@@ -90,7 +89,6 @@ async handleLogout(){
     this.props.history.push('/login')
   }
 }
-// {this.state.selection === 'ingredientlist' && <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>}
 
   render(){
 
@@ -100,6 +98,8 @@ async handleLogout(){
 
     <Navbar className='navbar-links'>
       <Nav className="nav-links">
+        {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
+        {!Cookies.get('Authorization') && <Link to='/login'>Login</Link>}
         <Link className="btn" to='/'>Homepage</Link>
         <Link className="btn" to='/ingredientlist'>Ingredients</Link>
         <Link className="btn" to='/menulist'>Menu</Link>
@@ -109,17 +109,21 @@ async handleLogout(){
    </Navbar>
 
 
-    <Link to='/registration'>Registration</Link>
-    <Link to='/login'>Login</Link>
+    {/*<Link to='/registration'>Registration</Link>*/}
+    {/*<Link to='/login'>Login</Link>*/}
 
     <Switch>
 
       <Route path='/registration'>
         <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
       </Route>
+    <Route exact path ='/'>
+          <Homepage  handleLogout={this.handleLogout}/>
+        </Route>
       <Route path ='/login'>
         <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
       </Route>
+
       <Route path='/profile'>
         <Profile/>
       </Route>
@@ -130,10 +134,6 @@ async handleLogout(){
         <MenuItemList/>
       </Route>
 
-
-      <Route exact path ='/'>
-        <Homepage  handleLogout={this.handleLogout}/>
-      </Route>
     </Switch>
     </>
   );
@@ -141,7 +141,15 @@ async handleLogout(){
 }
 
 export default withRouter(App);
+//
+// {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
+// <Link to='/login'>Login</Link>
 
+
+
+// <Route path ='/login'>
+//   <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
+// </Route>
 
 
 // this.props.history.push()

@@ -60,14 +60,11 @@ class Profile extends Component {
     <form>
       <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
       <input type="file" name='avatar' onChange={this.handleImage}/>
-
+      <button type='submit'>Save profile!</button>
       {this.state.avatar
       ? <img src={this.state.preview} alt=""/>
       : null
-      }
-
-      <button type='submit'>Save profile!</button>
-      <button type="button" className="logout-button" onClick={this.props.handleLogout}>Logout</button>
+      }  
     </form>
     </>
   );

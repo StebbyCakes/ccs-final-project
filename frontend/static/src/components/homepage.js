@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Cookies from 'js-cookie';
 import './App.css';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
 
 class Homepage extends Component {
   constructor(props) {
@@ -10,14 +11,19 @@ class Homepage extends Component {
 
     }
   }
-
+  //  <Navbar className='navbar-links'>
+  //      <Link className="btn" to='/'>Homepage</Link>
+  //      <Link className="btn" to='/ingredientlist'>Ingredients</Link>
+  //      <Link className="btn" to='/menulist'>Menu</Link>
+  //      <Link className="btn" to='/profile'>Profile</Link>
+  // </Navbar>
   render() {
     return(
       <>
 
-      <p>Homepage</p>
+      <p>This is the Homepage</p>
 
-    <button type="submit" className="btn btn-primary" onClick={this.handleLogout}>LOGOUT</button>
+
       </>
     )
   }
