@@ -79,7 +79,12 @@ class IngredientList extends Component {
         .catch()
     }
 
-    editIngredient(id, ingredient) {
+    editIngredient(id, name, price_per_pound) {
+      const ingredient = {
+        id: id,
+        name: name,
+        price_per_pound: price_per_pound
+      }
       const options = {
         method: 'PUT',
         headers: {
@@ -88,14 +93,17 @@ class IngredientList extends Component {
         },
         body: JSON.stringify(ingredient),
       }
+      console.log(options)
+      console.log(id)
       fetch(`/api/v1/ingredients/${id}/`, options)
         .then(response => {
           if(!response.ok) {
+            console.log(response)
             throw new Error('Network response was not ok');
           }
           const ingredients = [ ...this.state.ingredients];
-          const index = ingredients.findIndex(ingredient => ingredient.id === id);
-          ingredients[index] = ingredient;
+          const index = id
+          // ingredients[index] = ingredient;
           this.setState({ ingredients });
         });
     }

@@ -10,6 +10,7 @@ import Homepage from './homepage';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import PrivateRoute from './privateroute'
 
 
 class App extends Component{
@@ -114,27 +115,27 @@ async handleLogout(){
 
     <Switch>
 
-      <Route path='/registration'>
-        <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
+    <Route path='/registration'>
+      <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
+    </Route>
+  <Route exact path ='/'>
+        <Homepage  handleLogout={this.handleLogout}/>
       </Route>
-    <Route exact path ='/'>
-          <Homepage  handleLogout={this.handleLogout}/>
-        </Route>
-      <Route path ='/login'>
-        <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
-      </Route>
+    <Route path ='/login'>
+      <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
+    </Route>
 
-      <Route path='/profile'>
-        <Profile/>
-      </Route>
-      <Route path='/ingredientlist'>
-        <IngredientList/>
-      </Route>
-      <Route path='/menulist'>
-        <MenuItemList/>
-      </Route>
+    <Route path='/profile'>
+      <Profile/>
+    </Route>
+    <Route path='/ingredientlist'>
+      <IngredientList/>
+    </Route>
+    <Route path='/menulist'>
+      <MenuItemList/>
+    </Route>
 
-    </Switch>
+  </Switch>
     </>
   );
 }

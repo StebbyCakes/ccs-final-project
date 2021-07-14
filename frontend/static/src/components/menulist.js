@@ -9,14 +9,19 @@ class MenuItemList extends Component {
     super(props);
     this.state = {
       menuitems: [],
+      dino: 'new option',
+      ingredients: [],
     }
     this.deleteMenuItem = this.deleteMenuItem.bind(this);
     this.editMenuItem = this.editMenuItem.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.addMenuItem = this.addMenuItem.bind(this);
+    this.fetchIngredients = this.fetchIngredients.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
       this.fetchData();
+      this.fetchIngredients();
     }
 
     componentWillUnmount() {
@@ -31,6 +36,12 @@ class MenuItemList extends Component {
           return response.json();
         })
         .then(data => this.setState({ menuitems: data }));
+    }
+
+  fetchIngredients() {
+      const response = fetch('/api/v1/ingredients/')
+      .then(data => data.json())
+      .then(json => this.setState({ingredients: json}))
     }
 
 
@@ -100,6 +111,10 @@ class MenuItemList extends Component {
         });
     }
 
+    handleChange(e) {
+      this.setState({dino: e.target.value})
+    }
+
     render() {
 
       const displayMenuItems = this.state.menuitems.map((menuitem) => (
@@ -108,6 +123,13 @@ class MenuItemList extends Component {
       return(
           <>
           <div className="menuitem-list">
+            {console.log(this.state.ingredients)}
+            <select value={this.state.dino} onChange={this.handleChange} style={{width: '1000px'}}>
+              <option name='1'>'number 1'</option>
+              <option name='2'>"number 2"</option>
+              <option name='3'>"number 3"</option>
+              <option name='4'>"number 4"</option>
+            </select>
             <ul>{displayMenuItems}</ul>
               <section>
                 <CreateMenuItem addMenuItem={this.addMenuItem}/>

@@ -6,6 +6,7 @@ class EditIngredient extends Component {
     super(props)
     this.state = {
       isEditing: false,
+      id: this.props.ingredient.id,
       name: this.props.ingredient.name,
       price_per_pound: this.props.ingredient.price_per_pound,
     }
@@ -17,12 +18,13 @@ editIngredient() {
   this.setState({ isEditing: false});
 
   const ingredient = {
+    id: this.state.id,
     name: this.state.name,
     price_per_pound: this.state.price_per_pound
   }
 
-  const id = this.props.ingredient.id;
-  this.props.editIngredient(id, ingredient);
+  // const id = this.props.ingredient.id;
+  this.props.editIngredient(ingredient.id, ingredient.name, ingredient.price_per_pound);
 }
 
 inputIngredient(event){
@@ -47,7 +49,7 @@ render() {
       ? <button className="edit-ingredient" type='button' onClick={this.editIngredient}>Save Edit</button>
       : <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>EDIT</button>
     }
-    {<button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>DELETE</button>}
+    {<button className ="detail-button" type="button" onClick={() => this.props.deleteIngredient(ingredient.id)}>X</button>}
     </li>
   )}
 }
