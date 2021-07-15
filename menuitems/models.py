@@ -11,8 +11,8 @@ from ingredients.models import Ingredient
 # Create your models here.
 # contain objects [{ingredient_id, ingredient_weight for the specific menu item},{}]
 class MenuItem(models.Model):
-    name = models.CharField(max_length = 255)
-    ingredient = models.ManyToManyField(Ingredient)
+    name = models.CharField(max_length=255)
+    ingredients = models.ManyToManyField(Ingredient)
 
     def __str__(self):
         return self.name

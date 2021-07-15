@@ -4,7 +4,8 @@ import './App.css';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 
-const {REACT_APP_SPOONACULAR_API_KEY} = process.env
+// const  REACT_APP_SPOONACULAR_API_KEY = process.env. REACT_APP_SPOONACULAR_API_KEY
+const { REACT_APP_SPOONACULAR_API_KEY } = process.env
 
 class Homepage extends Component {
   constructor(props) {
