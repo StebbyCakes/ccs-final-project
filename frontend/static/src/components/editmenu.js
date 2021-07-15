@@ -35,6 +35,13 @@ render() {
       ?
         <>
           <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem} />
+            <select value={this.state.dino} onChange={this.handleChange} style={{width: '50px'}}>
+              {this.props.ingredients.map((ingredient) =>
+                <option key={ingredient.id}>
+                  {ingredient.name}
+                </option>
+              )};
+            </select>
         </>
 
       : <p>{menuitem.name}</p>

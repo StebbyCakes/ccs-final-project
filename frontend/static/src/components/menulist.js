@@ -118,18 +118,12 @@ class MenuItemList extends Component {
     render() {
 
       const displayMenuItems = this.state.menuitems.map((menuitem) => (
-        <EditMenuItem key={menuitem.id} menuitem={menuitem} deleteMenuItem={this.deleteMenuItem} editMenuItem={this.editMenuItem} />
+      <EditMenuItem ingredients={this.state.ingredients} key={menuitem.id} menuitem={menuitem} deleteMenuItem={this.deleteMenuItem} editMenuItem={this.editMenuItem} />
       ));
       return(
           <>
           <div className="menuitem-list">
             {console.log(this.state.ingredients)}
-            <select value={this.state.dino} onChange={this.handleChange} style={{width: '1000px'}}>
-              <option name='1'>'number 1'</option>
-              <option name='2'>"number 2"</option>
-              <option name='3'>"number 3"</option>
-              <option name='4'>"number 4"</option>
-            </select>
             <ul>{displayMenuItems}</ul>
               <section>
                 <CreateMenuItem addMenuItem={this.addMenuItem}/>

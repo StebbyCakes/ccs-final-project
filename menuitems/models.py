@@ -1,4 +1,5 @@
 from django.db import models
+from ingredients.models import Ingredient
 
 
 
@@ -11,7 +12,7 @@ from django.db import models
 # contain objects [{ingredient_id, ingredient_weight for the specific menu item},{}]
 class MenuItem(models.Model):
     name = models.CharField(max_length = 255)
-    # ingredients = models.ManyToManyField() 
+    ingredient = models.ManyToManyField(Ingredient)
 
     def __str__(self):
         return self.name
