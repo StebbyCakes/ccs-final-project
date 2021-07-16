@@ -9,7 +9,6 @@ class MenuItemList extends Component {
     super(props);
     this.state = {
       menuitems: [],
-      dino: 'new option',
       ingredients: [],
     }
     this.deleteMenuItem = this.deleteMenuItem.bind(this);
@@ -17,7 +16,6 @@ class MenuItemList extends Component {
     this.fetchData = this.fetchData.bind(this);
     this.addMenuItem = this.addMenuItem.bind(this);
     this.fetchIngredients = this.fetchIngredients.bind(this);
-    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
       this.fetchData();
@@ -111,9 +109,7 @@ class MenuItemList extends Component {
         });
     }
 
-    handleChange(e) {
-      this.setState({dino: e.target.value})
-    }
+
 
     render() {
 
@@ -123,7 +119,6 @@ class MenuItemList extends Component {
       return(
           <>
           <div className="menuitem-list">
-            {console.log(this.state.ingredients)}
             <ul>{displayMenuItems}</ul>
               <section>
                 <CreateMenuItem addMenuItem={this.addMenuItem}/>

@@ -93,8 +93,6 @@ class IngredientList extends Component {
         },
         body: JSON.stringify(ingredient),
       }
-      console.log(options)
-      console.log(id)
       fetch(`/api/v1/ingredients/${id}/`, options)
         .then(response => {
           if(!response.ok) {

@@ -142,15 +142,3 @@ async handleLogout(){
 }
 
 export default withRouter(App);
-//
-// {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
-// <Link to='/login'>Login</Link>
-
-
-
-// <Route path ='/login'>
-//   <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
-// </Route>
-
-
-// this.props.history.push()

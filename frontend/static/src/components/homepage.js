@@ -32,9 +32,15 @@ class Homepage extends Component {
   //      <Link className="btn" to='/profile'>Profile</Link>
   // </Navbar>
   render() {
-    console.log(process.env.REACT_APP_SPOONACULAR_API_KEY)
+
     return(
       <>
+
+      {
+        this.joke
+        ?  <button className='button' type='button' onClick={this.joke}>Click me</button>
+        : <p>{this.joke}</p>
+    }
 
       <p>This is the Homepage</p>
 
