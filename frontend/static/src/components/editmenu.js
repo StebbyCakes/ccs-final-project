@@ -39,7 +39,7 @@ render() {
           <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem} />
         </>
 
-      : <p>{menuitem.name}</p>
+      : <p>{this.state.name}</p>
     }
     {
       this.state.isEditing
