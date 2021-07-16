@@ -6,6 +6,7 @@ class EditMenuItem extends Component {
     super(props)
     this.state = {
       isEditing: false,
+      id: this.props.menuitem.id,
       name: this.props.menuitem.name,
     }
     this.editMenuItem = this.editMenuItem.bind(this);
@@ -16,11 +17,12 @@ editMenuItem() {
   this.setState({ isEditing: false});
 
   const menuitem = {
+    id: this.state.id,
     name: this.state.name,
   }
 
-  const id = this.props.menuitem.id;
-  this.props.editMenuItem(id, menuitem);
+  // const id = this.props.menuitem.id;
+  this.props.editMenuItem(menuitem.id, menuitem.name);
 }
 
 inputMenuItem(event){

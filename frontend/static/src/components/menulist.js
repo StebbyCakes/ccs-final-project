@@ -88,7 +88,11 @@ class MenuItemList extends Component {
         .catch()
     }
 
-    editMenuItem(id, menuitem) {
+    editMenuItem(id, name) {
+      const menuitem = {
+        id: id,
+        name: name
+      }
       const options = {
         method: 'PUT',
         headers: {
@@ -103,8 +107,8 @@ class MenuItemList extends Component {
             throw new Error('Network response was not ok');
           }
           const menuitems = [ ...this.state.menuitems];
-          const index = menuitems.findIndex(menuitem => menuitem.id === id);
-          menuitems[index] = menuitem;
+          const index = id
+          // menuitems[index] = menuitem;
           this.setState({ menuitems });
         });
     }
@@ -124,6 +128,7 @@ class MenuItemList extends Component {
                 <CreateMenuItem addMenuItem={this.addMenuItem}/>
               </section>
           </div>
+
           </>
       )
     }

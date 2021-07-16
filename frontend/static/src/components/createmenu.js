@@ -57,6 +57,7 @@ class CreateMenuItem extends Component {
     }
 
   render(){
+    const ingredients = this.state.ingredients.map(ingredient => <div>{ingredient.name}</div>);
     return(
       <form onSubmit={this.submitMenuItem}>
         <input type="text" name='name' value={this.state.name} placeholder="Menu item name" onChange={this.handleInput} />
@@ -71,6 +72,8 @@ class CreateMenuItem extends Component {
         <input type="text" name='weight_of_ingredient' value={this.state.weight_of_ingredient} placeholder='Weight in Grams' onChange={this.handleInput}/>
         <button className='button' type='submit' onClick={this.submitIngredientToMenuItem}>+</button>
         <button className='button' type='submit'>Add to List</button>
+
+      {ingredients}
       </form>
     )}
 }
