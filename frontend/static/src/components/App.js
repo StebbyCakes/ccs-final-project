@@ -89,7 +89,7 @@ async handleLogout(){
   if(response.ok){
     Cookies.remove('Authorization');
     // this.setState({ selection: 'login' });
-    this.props.history.push('/login')
+    this.props.history.push('/')
   }
 }
 
@@ -102,7 +102,7 @@ async handleLogout(){
     <Navbar className='navbar-links'>
       <Nav className="nav-links">
         {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
-        {!Cookies.get('Authorization') && <Link to='/login'>Login</Link>}
+        {!Cookies.get('Authorization') && <Link to='/'>Login</Link>}
         {Cookies.get('Authorization') && <Link className="btn" to='/'>Homepage</Link>}
         {Cookies.get('Authorization') && <Link className="btn" to='/ingredientlist'>Ingredients</Link>}
         {Cookies.get('Authorization') && <Link className="btn" to='/menulist'>Menu</Link>}
@@ -118,11 +118,8 @@ async handleLogout(){
       <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
     </Route>
   <Route exact path ='/'>
-        <Homepage/>
+        <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
       </Route>
-    <Route path ='/login'>
-      <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
-    </Route>
 
     <Route path='/profile'>
       <Profile/>
