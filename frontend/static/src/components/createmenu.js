@@ -11,6 +11,7 @@ class CreateMenuItem extends Component {
       ingredient: '',
       weight_of_ingredient: '',
       options: 'new option',
+      showIngredients: true,
     }
     this.submitMenuItem = this.submitMenuItem.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -30,7 +31,7 @@ class CreateMenuItem extends Component {
     menuitem.weight_of_ingredient = parseFloat(menuitem.weight_of_ingredient);
 
     this.props.addMenuItem(menuitem);
-    this.setState({ name: '', ingredient: '', weight_of_ingredient: '' });
+    this.setState({ name: '', ingredient: '', weight_of_ingredient: '' , showIngredients: false, ingredients: []});
   }
 
   submitIngredientToMenuItem(event) {
@@ -47,7 +48,7 @@ class CreateMenuItem extends Component {
   }
 
   handleInput(event) {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({[event.target.name]: event.target.value, showIngredients: true});
   }
 
   fetchIngredients() {
@@ -70,10 +71,10 @@ class CreateMenuItem extends Component {
           ))}
         </select>
         <input type="text" name='weight_of_ingredient' value={this.state.weight_of_ingredient} placeholder='Weight in Grams' onChange={this.handleInput}/>
-        <button className='button' type='submit' onClick={this.submitIngredientToMenuItem}>+</button>
+        <button className='button' type='button' onClick={this.submitIngredientToMenuItem}>+</button>
         <button className='button' type='submit'>Add to List</button>
 
-      {ingredients}
+      {this.state.showIngredients && ingredients}
       </form>
     )}
 }

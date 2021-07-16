@@ -64,6 +64,8 @@ class App extends Component{
       const data = await response.json().catch(handleError);
 
       Cookies.set('Authorization', `Token ${data.key}`);
+      this.props.history.push('/menulist')
+
       // this.setState({ selection : 'ingredientlist'});
     }
   }
@@ -101,17 +103,14 @@ async handleLogout(){
       <Nav className="nav-links">
         {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
         {!Cookies.get('Authorization') && <Link to='/login'>Login</Link>}
-        <Link className="btn" to='/'>Homepage</Link>
-        <Link className="btn" to='/ingredientlist'>Ingredients</Link>
-        <Link className="btn" to='/menulist'>Menu</Link>
-        <Link className="btn" to='/profile'>Profile</Link>
-        <button type="button" className="btn" onClick={this.handleLogout}>Logout</button>
+        {Cookies.get('Authorization') && <Link className="btn" to='/'>Homepage</Link>}
+        {Cookies.get('Authorization') && <Link className="btn" to='/ingredientlist'>Ingredients</Link>}
+        {Cookies.get('Authorization') && <Link className="btn" to='/menulist'>Menu</Link>}
+        {Cookies.get('Authorization') && <Link className="btn" to='/profile'>Profile</Link>}
+        {Cookies.get('Authorization') && <button type="button" className="btn" onClick={this.handleLogout}>Logout</button>}
+
       </Nav>
    </Navbar>
-
-
-    {/*<Link to='/registration'>Registration</Link>*/}
-    {/*<Link to='/login'>Login</Link>*/}
 
     <Switch>
 
@@ -119,7 +118,7 @@ async handleLogout(){
       <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
     </Route>
   <Route exact path ='/'>
-        <Homepage  handleLogout={this.handleLogout}/>
+        <Homepage/>
       </Route>
     <Route path ='/login'>
       <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>

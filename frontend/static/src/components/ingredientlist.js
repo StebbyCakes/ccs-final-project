@@ -114,10 +114,10 @@ class IngredientList extends Component {
       return(
           <>
           <div className="ingredient-list">
-            <ul>{displayIngredients}</ul>
               <section>
                 <CreateIngredient addIngredient={this.addIngredient}/>
               </section>
+              <ul>{displayIngredients}</ul>
           </div>
           </>
       )

@@ -123,10 +123,11 @@ class MenuItemList extends Component {
       return(
           <>
           <div className="menuitem-list">
-            <ul>{displayMenuItems}</ul>
+
               <section>
                 <CreateMenuItem addMenuItem={this.addMenuItem}/>
               </section>
+                <ul>{displayMenuItems}</ul>
           </div>
 
           </>
