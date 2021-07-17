@@ -21,7 +21,6 @@ editMenuItem() {
     name: this.state.name,
   }
 
-  // const id = this.props.menuitem.id;
   this.props.editMenuItem(menuitem.id, menuitem.name);
 }
 
@@ -36,7 +35,8 @@ render() {
       this.state.isEditing
       ?
         <>
-          <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem} />
+          <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem}/>
+          <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.inputMenuItem} />
         </>
 
       : <p>{this.state.name}</p>

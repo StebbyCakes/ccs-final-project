@@ -17,7 +17,6 @@ class App extends Component{
   constructor(props) {
     super(props);
       this.state = {
-        // selection: !!Cookies.get('Authorization') ? 'ingredientlist' : 'login'
       }
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
@@ -42,7 +41,6 @@ class App extends Component{
     if(response.ok){
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
-      // this.setState({ selection : 'ingredientlist' });
       this.props.history.push('/menulist')
     }
   }
@@ -65,8 +63,6 @@ class App extends Component{
 
       Cookies.set('Authorization', `Token ${data.key}`);
       this.props.history.push('/menulist')
-
-      // this.setState({ selection : 'ingredientlist'});
     }
   }
 
@@ -88,7 +84,6 @@ async handleLogout(){
 
   if(response.ok){
     Cookies.remove('Authorization');
-    // this.setState({ selection: 'login' });
     this.props.history.push('/')
   }
 }
@@ -103,7 +98,7 @@ async handleLogout(){
       <Nav className="nav-links">
         {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
         {!Cookies.get('Authorization') && <Link to='/'>Login</Link>}
-        {Cookies.get('Authorization') && <Link className="btn" to='/'>Homepage</Link>}
+        {Cookies.get('Authorization') && <Link className="btn" to='/homepage'>Homepage</Link>}
         {Cookies.get('Authorization') && <Link className="btn" to='/ingredientlist'>Ingredients</Link>}
         {Cookies.get('Authorization') && <Link className="btn" to='/menulist'>Menu</Link>}
         {Cookies.get('Authorization') && <Link className="btn" to='/profile'>Profile</Link>}
@@ -120,6 +115,9 @@ async handleLogout(){
   <Route exact path ='/'>
         <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
       </Route>
+  <Route path ='/homepage'>
+    <Homepage/>
+  </Route>
 
     <Route path='/profile'>
       <Profile/>

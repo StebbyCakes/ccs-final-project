@@ -8,7 +8,6 @@ class IngredientList extends Component {
     super(props);
     this.state = {
       ingredients: [],
-      // priceperound: [],
     }
     this.deleteIngredient = this.deleteIngredient.bind(this);
     this.editIngredient = this.editIngredient.bind(this);
@@ -68,7 +67,6 @@ class IngredientList extends Component {
         .then(response => {
           if(!response.ok) {
             throw new Error('Network response was not ok');
-            // handle the error
           }
           return response.json();
         })
@@ -101,7 +99,6 @@ class IngredientList extends Component {
           }
           const ingredients = [ ...this.state.ingredients];
           const index = id
-          // ingredients[index] = ingredient;
           this.setState({ ingredients });
         });
     }
