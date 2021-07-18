@@ -119,6 +119,10 @@ async handleLogout(){
     <Homepage/>
   </Route>
 
+  <Route path ='/test'>
+  <test/>
+  </Route>
+
     <Route path='/profile'>
       <Profile/>
     </Route>
