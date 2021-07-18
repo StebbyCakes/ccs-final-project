@@ -93,7 +93,6 @@ async handleLogout(){
 
   return (
     <>
-
     <Navbar className='navbar-links'>
       <Nav className="mr-auto">
         {!Cookies.get('Authorization') && <Link className= 'btn btn-primary' to='/registration'>Registration</Link>}
@@ -101,11 +100,10 @@ async handleLogout(){
         {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/homepage'>Homepage</Link>}
         {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/ingredientlist'>Ingredients</Link>}
         {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/menulist'>Menu</Link>}
-        {Cookies.get('Authorization') && <button type="button" className="btn btn-outline-warning" onClick={this.handleLogout}>Logout</button>}
+        {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" onClick={this.handleLogout}>Logout</Link>}
 
       </Nav>
    </Navbar>
-
     <Switch>
 
     <Route path='/registration'>

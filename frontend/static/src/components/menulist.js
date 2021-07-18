@@ -127,7 +127,7 @@ class MenuItemList extends Component {
               <section>
                 <CreateMenuItem addMenuItem={this.addMenuItem}/>
               </section>
-                <ul>{displayMenuItems}</ul>
+                <ul className="list-unstyled">{displayMenuItems}</ul>
           </div>
 
           </>

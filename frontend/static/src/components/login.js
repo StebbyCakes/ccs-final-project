@@ -24,7 +24,7 @@ handleSubmit(event){
 
    render() {
      return(
-     <form onSubmit={this.handleSubmit}>
+     <form className='login-form'onSubmit={this.handleSubmit}>
    <div className="mb-3">
      <label htmlFor="username" className="form-label">Username</label>
      <input onChange={this.handleInput} type="text" className="form-control" id="username" name='username'></input>

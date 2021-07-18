@@ -114,7 +114,7 @@ class IngredientList extends Component {
               <section>
                 <CreateIngredient addIngredient={this.addIngredient}/>
               </section>
-              <ul>{displayIngredients}</ul>
+              <ul className="list-unstyled">{displayIngredients}</ul>
           </div>
           </>
       )
