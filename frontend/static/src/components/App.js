@@ -95,14 +95,13 @@ async handleLogout(){
     <>
 
     <Navbar className='navbar-links'>
-      <Nav className="nav-links">
-        {!Cookies.get('Authorization') && <Link to='/registration'>Registration</Link>}
-        {!Cookies.get('Authorization') && <Link to='/'>Login</Link>}
-        {Cookies.get('Authorization') && <Link className="btn" to='/homepage'>Homepage</Link>}
-        {Cookies.get('Authorization') && <Link className="btn" to='/ingredientlist'>Ingredients</Link>}
-        {Cookies.get('Authorization') && <Link className="btn" to='/menulist'>Menu</Link>}
-        {Cookies.get('Authorization') && <Link className="btn" to='/profile'>Profile</Link>}
-        {Cookies.get('Authorization') && <button type="button" className="btn" onClick={this.handleLogout}>Logout</button>}
+      <Nav className="mr-auto">
+        {!Cookies.get('Authorization') && <Link className= 'btn btn-primary' to='/registration'>Registration</Link>}
+        {!Cookies.get('Authorization') && <Link className= 'btn btn-primary' to='/'>Login</Link>}
+        {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/homepage'>Homepage</Link>}
+        {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/ingredientlist'>Ingredients</Link>}
+        {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/menulist'>Menu</Link>}
+        {Cookies.get('Authorization') && <button type="button" className="btn btn-outline-warning" onClick={this.handleLogout}>Logout</button>}
 
       </Nav>
    </Navbar>
@@ -118,14 +117,6 @@ async handleLogout(){
   <Route path ='/homepage'>
     <Homepage/>
   </Route>
-
-  <Route path ='/test'>
-  <test/>
-  </Route>
-
-    <Route path='/profile'>
-      <Profile/>
-    </Route>
     <Route path='/ingredientlist'>
       <IngredientList/>
     </Route>

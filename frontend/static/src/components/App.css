@@ -1,38 +1,39 @@
-.App {
-  text-align: center;
+#root::before {
+  content: '';
+  position: fixed;
+  z-index: -10;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: url('https://wallpapercave.com/wp/wp3172692.jpg') top left / cover no-repeat;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar-links{
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: black;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p{
+  /* display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: 2px solid white; */
+  font-size: 20px;
+  border: 2.5px solid black;
+  background-color: white;
+  display: table-cell;
+}
+
+.form-label{
+  font-size: 27px;
+  background-color: transparent;
+  color: #C3FDFC;
 }

@@ -27,6 +27,7 @@ editMenuItem() {
 inputMenuItem(event){
   this.setState({ [event.target.name]:  event.target.value});
 }
+// <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.inputMenuItem} />
 render() {
   const menuitem = this.props.menuitem;
   return(
@@ -36,7 +37,7 @@ render() {
       ?
         <>
           <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem}/>
-          <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.inputMenuItem} />
+
         </>
 
       : <p>{this.state.name}</p>
