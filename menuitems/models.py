@@ -13,6 +13,7 @@ from ingredients.models import Ingredient
 class MenuItem(models.Model):
     name = models.CharField(max_length=255)
     ingredients = models.JSONField(null=True) # [{},{},{},{}]
+    menuImg = models.ImageField(upload_to='menuitems/', null = True)
     # weight_of_ingredient = models.DecimalField(max_digits=6, decimal_places=2, null=True)
 
     def __str__(self):

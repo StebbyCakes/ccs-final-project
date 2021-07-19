@@ -8,9 +8,51 @@ class EditMenuItem extends Component {
       isEditing: false,
       id: this.props.menuitem.id,
       name: this.props.menuitem.name,
+      menuImg: null,
+      preview: '',
     }
     this.editMenuItem = this.editMenuItem.bind(this);
     this.inputMenuItem = this.inputMenuItem.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleImage = this.handleImage.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInput(event) {
+    this.setState({ [event.target.name]: event.target.value});
+  }
+
+  handleImage(e){
+    let file = e.target.files[0]
+    this.setState({
+      menuImg: file,
+    })
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      this.setState({
+        preview: reader.result,
+      });
+    }
+
+    reader.readAsDataURL(file);
+  }
+
+  async handleSubmit(event){
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append('menuImg', this.state.menuImg);
+    formData.append('menuitems', this.state.menuitems);
+
+    const options = {
+      method: 'PUT',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: formData,
+    }
+    const response = await fetch('/api/v1/menuitems/', options);
+    console.log(response)
+
   }
 
 editMenuItem() {
@@ -37,7 +79,15 @@ render() {
       ?
         <>
           <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem}/>
+            <form onSubmit={this.handleSubmit}>
 
+              <input type="file" name='menuImg' onChange={this.handleImage}/>
+              <button type='submit'>Save</button>
+              {this.state.menuImg
+              ? <img className='img'src={this.state.preview} alt=""/>
+              : null
+              }
+            </form>
         </>
 
       : <p>{this.state.name}</p>

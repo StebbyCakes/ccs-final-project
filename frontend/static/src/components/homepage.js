@@ -25,7 +25,6 @@ class Homepage extends Component {
     this.fetchData = this.fetchData.bind(this);
     this.fetchIngredients = this.fetchIngredients.bind(this);
     this.calculateMenuItemCost = this.calculateMenuItemCost.bind(this);
-
   }
 
   componentDidMount(){
@@ -94,6 +93,7 @@ class Homepage extends Component {
         ${price}
         <p></p>
       </div>
+
     )})
     return(
 

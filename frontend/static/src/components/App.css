@@ -67,7 +67,20 @@ p{
   width: 100%;
   display: flex;
   flex-direction: column;
+}
 
+.img{
+  width: 10%;
+  height: 10%;
+}
+
+#logout-btn{
+  justify-content: flex-end;
+}
+
+#ingredient-list{
+  display: flex;
+  flex-direction: column;
 }
 
 ul{
@@ -79,11 +92,6 @@ ul{
 ul p:hover + button{
   display: inline!important;
 }
-
-
-/* ul p:hover + button + button{
-  display: inline!important;
-} */
 
 
 ul .list button {

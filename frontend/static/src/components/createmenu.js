@@ -58,7 +58,7 @@ class CreateMenuItem extends Component {
     }
 
   render(){
-    const ingredients = this.state.ingredients.map(ingredient => <div>{ingredient.name}</div>);
+    const ingredients = this.state.ingredients.map(ingredient => <div id='ingredient-list' >{ingredient.name}</div>);
     return(
       <form onSubmit={this.submitMenuItem}>
         <input type="text" name='name' value={this.state.name} placeholder="Menu item name" onChange={this.handleInput} />

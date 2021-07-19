@@ -100,7 +100,7 @@ async handleLogout(){
         {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/homepage'>Homepage</Link>}
         {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/ingredientlist'>Ingredients</Link>}
         {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" to='/menulist'>Menu</Link>}
-        {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" onClick={this.handleLogout}>Logout</Link>}
+        {Cookies.get('Authorization') && <Link className="btn btn-outline-warning" id='logout-btn' onClick={this.handleLogout}>Logout</Link>}
 
 
    </Navbar>
