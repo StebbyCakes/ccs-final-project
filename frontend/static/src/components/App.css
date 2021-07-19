@@ -40,23 +40,6 @@ p{
   display: table-cell;
 }
 
-.navbar-links a{
-  /* float: none; */
-  /* position: relative; */
-  margin-left: 65%;
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center; */
-}
-
-.btn-primary{
-  float: none;
-  position: relative;
-  margin: 0;
-  left: 230%!important;
-}
-
 .form-label{
   font-size: 27px;
   background-color: transparent;
@@ -92,14 +75,21 @@ ul{
   margin-left: 15px;
 }
 
-ul button{
+
+ul p:hover + button{
+  display: inline!important;
+}
+
+
+/* ul p:hover + button + button{
+  display: inline!important;
+} */
+
+
+ul .list button {
   display: none;
 }
-ul p:hover + button{
-  display: inline;
-}
 
-
-ul p:hover + button + button{
-  display: inline;
+ul .list:hover button {
+  display: block;
 }

@@ -44,10 +44,10 @@ render() {
     }
     {
       this.state.isEditing
-      ? <button className="edit-menuitem" type='button' onClick={this.editMenuItem}>Save Edit</button>
-      : <button className ="edit-button" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
+      ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
+      : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
     }
-    {<button className ="detail-button" type="button" onClick={() => this.props.deleteMenuItem(menuitem.id)}>x</button>}
+    {<button className ="btn btn-danger" type="button" onClick={() => this.props.deleteMenuItem(menuitem.id)}>x</button>}
     </li>
   )}
 }

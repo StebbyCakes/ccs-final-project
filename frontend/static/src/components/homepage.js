@@ -6,43 +6,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const { REACT_APP_SPOONACULAR_API_KEY } = process.env
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
 
-  },
-  {
-    name: "Page B",
-    uv: 3000,
+let menuName = '';
+let price ='';
+let newPrice = 0;
 
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-
-  }
-];
+let menuData = [];
 
 class Homepage extends Component {
   constructor(props) {
@@ -59,10 +28,11 @@ class Homepage extends Component {
   }
 
   componentDidMount(){
-    this.fetchJoke();
+    // this.fetchJoke();
     this.fetchData();
     this.fetchIngredients();
-  }
+
+}
 
     componentWillUnmount() {
       clearInterval(this.retrieveMenuitems)
@@ -84,6 +54,7 @@ class Homepage extends Component {
       .then(json => this.setState({ingredients: json}))
     }
 
+
   fetchJoke() {
     const joke = fetch(`https://api.spoonacular.com/food/jokes/random?apiKey=${REACT_APP_SPOONACULAR_API_KEY}`)
     .then((data) => data.json())
@@ -99,22 +70,32 @@ class Homepage extends Component {
       const ingredientLb = (parseFloat(ingredient.weight_of_ingredient) * (0.0022046226))
       const ingredientCost = ((ingredientLb) * (parseFloat(globalIngredient.price_per_pound)))
       return sum + ingredientCost
-    }, 0)
+    }, 0);
   }
 
+
   render() {
+    const data = [];
+
     const displayMenuItems = this.state.menuitems.map((menuitem) => {
-      console.log(this.calculateMenuItemCost(menuitem))
+      menuName = menuitem.name
+      price = this.calculateMenuItemCost(menuitem);
+      data.push({
+        name: menuName,
+        uv: price,
+      });
+      newPrice  = parseFloat(price)
       return (
+
         <div className='menuCost'>
-        {menuitem.name}
+        {menuName}
         <h1></h1>
-        ${this.calculateMenuItemCost(menuitem)}
+        ${price}
         <p></p>
       </div>
     )})
-
     return(
+
       <>
         <div >
           <ul >
@@ -122,8 +103,8 @@ class Homepage extends Component {
           </ul>
         </div>
         <BarChart
-          width={500}
-          height={300}
+          width= {1400}
+          height={500}
           data={data}
           margin={{
             top: 5,
@@ -137,7 +118,6 @@ class Homepage extends Component {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
           <Bar dataKey="uv" fill="#82ca9d" />
         </BarChart>
 
