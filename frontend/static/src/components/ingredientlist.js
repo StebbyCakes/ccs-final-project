@@ -112,7 +112,7 @@ class IngredientList extends Component {
     return (
       <>
       <div className='ingredient-container'>
-        <h2>Add Ingredient</h2>
+        <h2>Create Ingredient</h2>
         <CreateIngredient addIngredient={this.addIngredient} ingredients={this.state.ingredients}/>
           <Accordion  defaultActiveKey="0">
             <Card className='accordion-card'>

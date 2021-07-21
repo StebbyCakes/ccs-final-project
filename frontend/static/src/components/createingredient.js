@@ -45,7 +45,7 @@ class CreateIngredient extends Component {
        <form className='ingredient-form' onSubmit={this.handleSubmit}>
          <input type="text" name='name' value={this.state.name} placeholder="Enter ingredient name" onChange={this.handleInput}></input>
          <input type="text" name='price_per_pound' value={this.state.price_per_pound} placeholder='Enter price per pound' onChange={this.handleInput}></input>
-         <button className='add-ingredient' type='submit'>Add</button>
+         <button className='add-ingredient' type='submit'>Create</button>
        </form>
        </>
      )

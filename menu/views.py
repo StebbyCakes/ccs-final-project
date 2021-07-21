@@ -4,7 +4,7 @@ from .serializers import MenuItemSerializer, IngredientSerializer
 
 
 class IngredientListAPIView(generics.ListCreateAPIView):
-    queryset = Ingredient.objects.all()
+    queryset = Ingredient.objects.order_by('name')
     serializer_class = IngredientSerializer
 
 

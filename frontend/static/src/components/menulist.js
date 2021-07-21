@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Cookies from 'js-cookie';
 import EditMenuItem from './editmenu';
 import CreateMenuItem from './createmenu';
-
+import {Accordion, Button, Card} from 'react-bootstrap';
 
 class MenuItemList extends Component {
   constructor(props) {
@@ -116,14 +116,27 @@ class MenuItemList extends Component {
         editMenuItem= {this.editMenuItem} />));
 
     return (
-      <div className="menuitem-list">
-        <section>
-          <CreateMenuItem
-            availableIngredients={this.state.ingredients}
-            addMenuItem={this.addMenuItem}
-            />
-        </section>
-        <ul> {menuItems} </ul>
+      <div className='menu-form'>
+        <Accordion  defaultActiveKey="0">
+          <Card className='accordion-card'>
+            <Card.Header className='accordion-header'>
+              <Accordion.Toggle as={Button}  eventKey="0">
+                <span className='accordion-toggle'>
+                  Create a Menu Item
+                </span>
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body className='end-of-form'>
+                <CreateMenuItem availableIngredients={this.state.ingredients} addMenuItem={this.addMenuItem}/>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
+
+        <ul className='container menuitems'>
+          {menuItems}
+        </ul>
       </div>
     );
   }

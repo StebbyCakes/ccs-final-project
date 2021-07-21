@@ -10,7 +10,7 @@ class CreateMenuItem extends Component {
       preview: '',
 
       name: '',
-      menu_price: 1100,
+      menu_price: '',
       ingredients: {
 
       },
@@ -72,7 +72,7 @@ class CreateMenuItem extends Component {
     console.log('here', this.props.availableIngredients)
     const ingredients = this.state.availableIngredients?.map(ingredient =>
       <>
-        <li key={ingredient.id}>
+        <li key={ingredient.id} className="mb-3">
           <label htmlFor={ingredient.name}>{ingredient.name}</label>
           <input type="text" id={ingredient.name} name={ingredient.name} value={this.state[ingredient.name]} placeholder='Weight in Grams' onChange={this.handleIngredient}/>
         </li>
@@ -80,11 +80,15 @@ class CreateMenuItem extends Component {
     );
     return(
       <>
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name='name' value={this.state.name} placeholder="Menu item name" onChange={this.handleInput} />
-        <input type="text" name='menu_price' value={this.state.menu_price} placeholder="Price" onChange={this.handleInput} />
-        <ul>{ingredients}</ul>
-        <button type="submit">Create menu item</button>
+      <form  onSubmit={this.handleSubmit}>
+        <div className='create-menu-box'>
+          <input type="text" name='name' value={this.state.name} placeholder="Menu Item Name" onChange={this.handleInput} />
+          <input type="text" name='menu_price' value={this.state.menu_price} placeholder="Price on Menu" onChange={this.handleInput} />
+        </div>
+        <ul className='ingredient-grid'>
+          {ingredients}
+        </ul>
+        <button className='create-menu-button' type="submit">Create menu item</button>
         </form>
 
       </>

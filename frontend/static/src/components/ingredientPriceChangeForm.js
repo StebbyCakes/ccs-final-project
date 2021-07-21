@@ -82,7 +82,7 @@ class IngredientPriceChangeForm extends Component {
         </select>
         <p className='price-box'>{this.state.current_price_per_pound}</p>
         <input type="text" name='price_per_pound' value={this.state.price_per_pound} placeholder='Enter price per pound' onChange={this.handleInput}></input>
-        <button className='add-ingredient' type='submit'>Add New Price Listing</button>
+        <button className='add-ingredient' type='submit'>New Price Listing</button>
       </form>
       </>
     )
