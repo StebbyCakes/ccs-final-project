@@ -114,7 +114,7 @@ class IngredientList extends Component {
       <div className='ingredient-container'>
         <h2>Create Ingredient</h2>
         <CreateIngredient addIngredient={this.addIngredient} ingredients={this.state.ingredients}/>
-          <Accordion  defaultActiveKey="0">
+          <Accordion>
             <Card className='accordion-card'>
               <Card.Header className='accordion-header'>
                 <Accordion.Toggle as={Button}  eventKey="0">

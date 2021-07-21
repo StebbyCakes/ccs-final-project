@@ -117,7 +117,7 @@ class MenuItemList extends Component {
 
     return (
       <div className='menu-form'>
-        <Accordion  defaultActiveKey="0">
+        <Accordion>
           <Card className='accordion-card'>
             <Card.Header className='accordion-header'>
               <Accordion.Toggle as={Button}  eventKey="0">
