@@ -41,7 +41,7 @@ class App extends Component{
     if(response.ok){
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.props.history.push('/menulist')
+      this.props.history.push('/ingredientlist')
     }
   }
 
@@ -62,7 +62,7 @@ class App extends Component{
       const data = await response.json().catch(handleError);
 
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.props.history.push('/menulist')
+      this.props.history.push('/ingredientlist')
     }
   }
 
@@ -112,9 +112,7 @@ async handleLogout(){
   <Route exact path ='/'>
         <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation}/>
       </Route>
-  <Route path ='/homepage'>
-    <Homepage/>
-  </Route>
+
 
 <Route path='/profile'>
 <Profile/>
@@ -123,9 +121,15 @@ async handleLogout(){
     <Route path='/ingredientlist'>
       <IngredientList/>
     </Route>
+    <Route path ='/homepage'>
+      <Homepage/>
+    </Route>
+
     <Route path='/menulist'>
       <MenuItemList/>
     </Route>
+
+
 
   </Switch>
     </>

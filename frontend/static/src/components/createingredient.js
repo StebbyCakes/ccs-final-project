@@ -3,39 +3,53 @@ import Cookies from 'js-cookie';
 // import CreatePricePerPound from './createprice.js';
 
 class CreateIngredient extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      name: '',
-      price_per_pound: '',
-    }
+  constructor(props) {
+     super(props);
+     this.state = {
+       name: '',
+       price_per_pound: '',
+       start_date: new Date(),
+     }
 
-    this.submitIngredient = this.submitIngredient.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-  }
+     this.handleSubmit = this.handleSubmit.bind(this);
+     this.handleInput = this.handleInput.bind(this);
+   }
 
-  submitIngredient(event) {
-    event.preventDefault();
+   handleSubmit(event) {
+     event.preventDefault();
 
-    const ingredient = {...this.state};
-    ingredient.price_per_pound = parseFloat(ingredient.price_per_pound);
+     const ingredient = {
+       name: this.state.name,
+       price_listings: [
+         {
+           price_per_pound: parseInt(this.state.price_per_pound) * 100,
+           start_date: this.state.start_date,
+         },
+       ]
+     };
 
-    this.props.addIngredient(ingredient);
-    this.setState({ name: '', price_per_pound: '' });
-  }
+     this.props.addIngredient(ingredient);
+     this.setState({name: '', price_per_pound: '', start_date: new Date()});
+   }
+   // does start date automatically know what date it is and saves it to db?
 
-  handleInput(event) {
-    this.setState({[event.target.name]: event.target.value});
-  }
+   handleInput(event) {
+     this.setState({
+       [event.target.name]: event.target.value
+     });
+   }
 
-  render(){
-    return(
-      <form onSubmit={this.submitIngredient}>
-        <input type="text" name='name' value={this.state.name} placeholder="Enter ingredient name" onChange={this.handleInput}></input>
-        <input type="text" name='price_per_pound' value={this.state.price_per_pound} placeholder='Enter price per pound' onChange={this.handleInput}></input>
-        <button className='button' type='submit'>Add to List</button>
-      </form>
-    )}
+   render() {
+     return (
+       <>
+       <form className='ingredient-form' onSubmit={this.handleSubmit}>
+         <input type="text" name='name' value={this.state.name} placeholder="Enter ingredient name" onChange={this.handleInput}></input>
+         <input type="text" name='price_per_pound' value={this.state.price_per_pound} placeholder='Enter price per pound' onChange={this.handleInput}></input>
+         <button className='add-ingredient' type='submit'>Add</button>
+       </form>
+       </>
+     )
+   }
 }
 
 export default CreateIngredient

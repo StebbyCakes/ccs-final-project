@@ -52,7 +52,7 @@ class CreateMenuItem extends Component {
   }
 
   fetchIngredients() {
-      const response = fetch('/api/v1/ingredients/')
+      const response = fetch('/api/v1/menu/')
       .then(data => data.json())
       .then(json => this.setState({ingredientSelections: json}))
     }

@@ -26,7 +26,7 @@ class MenuItemList extends Component {
       clearInterval(this.retrieveMenuitems)
     }
     fetchData() {
-      fetch('/api/v1/menuitems/')
+      fetch('/api/v1/menu/')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -37,7 +37,7 @@ class MenuItemList extends Component {
     }
 
   fetchIngredients() {
-      const response = fetch('/api/v1/ingredients/')
+      const response = fetch('/api/v1/menu/')
       .then(data => data.json())
       .then(json => this.setState({ingredients: json}))
     }
@@ -52,7 +52,7 @@ class MenuItemList extends Component {
         },
       }
 
-      fetch(`/api/v1/menuitems/${id}`, options)
+      fetch(`/api/v1/menu/${id}`, options)
         .then(response => {
           const menuitems = [ ...this.state.menuitems ];
           const index = menuitems.findIndex(menuitem => menuitem.id === id);
@@ -73,7 +73,7 @@ class MenuItemList extends Component {
         },
         body: JSON.stringify(menuitem),
       }
-      fetch('/api/v1/menuitems/', options)
+      fetch('/api/v1/menu/', options)
         .then(response => {
           if(!response.ok) {
             throw new Error('Network response was not ok');
@@ -101,7 +101,7 @@ class MenuItemList extends Component {
         },
         body: JSON.stringify(menuitem),
       }
-      fetch(`/api/v1/menuitems/${id}/`, options)
+      fetch(`/api/v1/menu/${id}/`, options)
         .then(response => {
           if(!response.ok) {
             throw new Error('Network response was not ok');

@@ -8,6 +8,7 @@ class EditMenuItem extends Component {
       isEditing: false,
       id: this.props.menuitem.id,
       name: this.props.menuitem.name,
+      ingredients: this.props.ingredients,
       menuImg: null,
       preview: '',
     }
@@ -50,7 +51,7 @@ class EditMenuItem extends Component {
       },
       body: formData,
     }
-    const response = await fetch('/api/v1/menuitems/', options);
+    const response = await fetch(`/api/v1/menu/${this.state.id}/`, options);
     console.log(response)
 
   }
@@ -69,7 +70,7 @@ editMenuItem() {
 inputMenuItem(event){
   this.setState({ [event.target.name]:  event.target.value});
 }
-// <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.inputMenuItem} />
+
 render() {
   const menuitem = this.props.menuitem;
   return(
@@ -79,6 +80,10 @@ render() {
       ?
         <>
           <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem}/>
+          <p type ='text' name='ingredients' value={this.state.ingredients}></p>
+          {/*<input type="text" name='ingredient' value={this.props.ingredient} onChange={this.inputMenuItem} />*/}
+          <input type="text" name='weight_of_ingredient' value={this.state.weight_of_ingredient} onChange={this.inputMenuItem}/>
+          <input type="submit" name='name' value={this.ingredients} onChange={this.deleteIngredient}/>
             <form onSubmit={this.handleSubmit}>
 
               <input type="file" name='menuImg' onChange={this.handleImage}/>
@@ -90,7 +95,11 @@ render() {
             </form>
         </>
 
-      : <p>{this.state.name}</p>
+      : <p>
+          {this.state.name}
+          {this.state.ingredients}
+          {this.state.weight_of_ingredient}
+        </p>
     }
     {
       this.state.isEditing
