@@ -22,7 +22,7 @@ class CreateIngredient extends Component {
        name: this.state.name,
        price_listings: [
          {
-           price_per_pound: parseInt(this.state.price_per_pound) * 100,
+           price_per_pound: (parseFloat(this.state.price_per_pound).toFixed(2)),
            start_date: this.state.start_date,
          },
        ]

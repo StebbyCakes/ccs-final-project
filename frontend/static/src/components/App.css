@@ -134,10 +134,15 @@ ul .list:hover button {
 
 .price-box:empty{
   border: none;
+  width: 0px;
+}
+.price-box{
+  width:50px;
 }
 
 .toggle-button{
   border: none;
+
 }
 
 .ingredient-title{
@@ -156,8 +161,5 @@ ul .list:hover button {
   transition: color .15s
 }
 
-.price-change-form{
-  display: inline-block;
-}
 
 /* End of Ingredient page form */

@@ -27,7 +27,7 @@ class EditIngredient extends Component {
 
     if(this.props.ingredient.price_listings.length !== prevProps.ingredient.price_listings.length) {
       const current_price_listing = this.findCurrentPriceListing();
-      this.setState({price_per_pound: current_price_listing.price_per_pound});
+      this.setState({...this.props.ingredient, price_per_pound: current_price_listing.price_per_pound});
     }
   }
 

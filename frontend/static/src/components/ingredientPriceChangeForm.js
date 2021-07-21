@@ -33,7 +33,7 @@ class IngredientPriceChangeForm extends Component {
     const name = ingredients[index].name;
     let price_listings = ingredients[index].price_listings;
     const priceListing = {
-      price_per_pound: parseInt(this.state.price_per_pound),
+      price_per_pound: (parseFloat(this.state.price_per_pound).toFixed(2)),
       start_date: new Date(),
     }
 
