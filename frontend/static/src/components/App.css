@@ -58,9 +58,14 @@
   flex-direction: column;
 }
 
+.preview-img{
+  width: 30%;
+  height: 30%;
+}
+
 .img{
-  width: 10%;
-  height: 10%;
+  width: 15%;
+  height: 15%;
 }
 
 #logout-btn{
@@ -95,6 +100,12 @@ ul .list:hover button {
 .accordion-card.card{
   background-color: transparent;
   border: none;
+}
+
+.ingredient-form{
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
 }
 
 .ingredient-input{

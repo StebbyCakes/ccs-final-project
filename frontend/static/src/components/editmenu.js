@@ -6,9 +6,9 @@ class EditMenuItem extends Component {
   constructor(props){
     super(props)
     this.state = {
+      ...this.props.menuitem,
       isEditing: false,
-      id: this.props.menuitem.id,
-      name: this.props.menuitem.name,
+
     }
     this.editMenuItem = this.editMenuItem.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -23,9 +23,10 @@ editMenuItem() {
   const menuitem = {
     id: this.state.id,
     name: this.state.name,
+    menu_price: this.state.menu_price,
   }
 
-  this.props.editMenuItem(menuitem.id, menuitem.name);
+  this.props.editMenuItem(menuitem);
 }
 
 handleInput(event){
@@ -42,8 +43,19 @@ toggleMenuActiveStatus() {
 // <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.handleInput} />
 render() {
   const menuitem = this.props.menuitem;
-  const ingredient = this.props.ingredients;
-  const { is_active, isEditing,} = this.state;
+  // const ingredients = this.props.ingredients;
+  const { is_active, isEditing} = this.state;
+
+
+  const ingredients = Object.entries(this.state.ingredients) // [[onions, 22], [tomatoes, 23]];
+  ingredients.map((ingredient, index) => (
+    <li key={index}>
+      <p>{ingredient[0]}</p>
+      <p>{ingredient[1]}</p>
+    </li>
+  ));
+
+
   return(
 
 
@@ -54,7 +66,7 @@ render() {
         <>
       <input type="text" name='name' value={this.state.name} onChange={this.handleInput}/>
       </>
-      : <p>{this.state.name}</p>
+    : <><p>{this.state.name}</p>{ingredients}</>
     }
     {
       this.state.isEditing

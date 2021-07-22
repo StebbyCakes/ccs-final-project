@@ -20,7 +20,7 @@ class CreateMenuItem extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
     this.handleImage = this.handleImage.bind(this);
-    this.handleIMGSubmit = this.handleIMGSubmit.bind(this);
+    // this.handleIMGSubmit = this.handleIMGSubmit.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -34,7 +34,7 @@ class CreateMenuItem extends Component {
   handleImage(event){
     let file = event.target.files[0]
     this.setState({
-      menuImg: file,
+      image: file,
     })
     let reader = new FileReader();
     reader.onloadend = () => {
@@ -46,33 +46,34 @@ class CreateMenuItem extends Component {
     reader.readAsDataURL(file);
   }
 
-  async handleIMGSubmit(event){
-    event.preventDefault();
-    let formData = new FormData();
-    formData.append('menuImg', this.state.menuImg);
-    formData.append('menuitem', this.state.menuitem);
-
-    const options = {
-      method: 'PUT',
-      headers: {
-        'X-CSRFToken': Cookies.get('csrftoken'),
-      },
-      body: formData,
-    }
-    const response = await fetch('/api/v1/menu/', options);
-    this.props.history.push('/menulist')
-    console.log(response)
-  }
+  // async handleIMGSubmit(event){
+  //   event.preventDefault();
+  //   let formData = new FormData();
+  //   formData.append('menuImg', this.state.menuImg);
+  //   formData.append('menuitem', this.state.menuitem);
+  //
+  //   const options = {
+  //     method: 'PUT',
+  //     headers: {
+  //       'X-CSRFToken': Cookies.get('csrftoken'),
+  //     },
+  //     body: formData,
+  //   }
+  //   const response = await fetch('/api/v1/menu/', options);
+  //   this.props.history.push('/menulist')
+  //   console.log(response)
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    const {name, ingredients, menu_price} = this.state;
+    const {name, ingredients, menu_price, image} = this.state;
 
     const menuitem = {
       name,
       ingredients,
       menu_price: Number(menu_price) * 100,
+      image,
     };
 
     this.props.addMenuItem(menuitem);
@@ -80,8 +81,8 @@ class CreateMenuItem extends Component {
     this.setState({
       name: '',
       menu_price: '',
-      ingredients: {
-      },
+      ingredients: {},
+      image: null,
     });
   }
 
@@ -122,11 +123,10 @@ class CreateMenuItem extends Component {
         <ul className='ingredient-grid'>
           {ingredients}
         </ul>
-        <img src={defaultImage} alt=""/>
+        <img className='preview-img' src={defaultImage} alt=""/>
           <input type="file" name='menuImg' onChange={this.handleImage}/>
-          <button type='button' onclick={this.handleIMGSubmit}>Save</button>
           {this.state.menuImg
-          ? <img className='img'src={this.state.preview} alt="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartialartsplusinc.com%2Fhome%2Fdefault-image%2F&psig=AOvVaw2_wxZFvSEbu5shUuae6NFO&ust=1627012298162000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMj6nbLj9fECFQAAAAAdAAAAABAD"/>
+          ? <img className='img' src={this.state.preview} alt="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartialartsplusinc.com%2Fhome%2Fdefault-image%2F&psig=AOvVaw2_wxZFvSEbu5shUuae6NFO&ust=1627012298162000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMj6nbLj9fECFQAAAAAdAAAAABAD"/>
           : null
           }
         <button className='add-ingredient' type="submit">Create menu item</button>

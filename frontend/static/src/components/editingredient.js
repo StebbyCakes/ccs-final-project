@@ -43,20 +43,20 @@ class EditIngredient extends Component {
     });
 
     console.log('price_listings', price_listings)
-    // const ingredient = {
-    //   id,
-    //   is_active,
-    //   name,
-    //   price_listings,
-    // };
-    // this.props.editIngredient(ingredient);
-    // const current_price_listing = this.findCurrentPriceListing();
-    // this.setState({
-    //   price_per_pound: current_price_listing.price_per_pound,
-    //   start_date: new Date(current_price_listing.start_date).toISOString().split('T')[0],
-    //   new_price_per_pound: '',
-    //   new_start_date: new Date().toISOString().split('T')[0],
-    // });
+    const ingredient = {
+      id,
+      is_active,
+      name,
+      price_listings,
+    };
+    this.props.editIngredient(ingredient);
+    const current_price_listing = this.findCurrentPriceListing();
+    this.setState({
+      price_per_pound: current_price_listing.price_per_pound,
+      start_date: new Date(current_price_listing.start_date).toISOString().split('T')[0],
+      new_price_per_pound: '',
+      new_start_date: new Date().toISOString().split('T')[0],
+    });
   }
 
   editIngredient() {

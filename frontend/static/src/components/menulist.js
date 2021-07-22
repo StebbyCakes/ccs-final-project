@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import EditMenuItem from './editmenu';
 import CreateMenuItem from './createmenu';
 import {Accordion, Button, Card} from 'react-bootstrap';
+import IngredientsModal from './Modal.js'
 
 class MenuItemList extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class MenuItemList extends Component {
     this.fetchMenuItems = this.fetchMenuItems.bind(this);
     this.addMenuItem = this.addMenuItem.bind(this);
     this.fetchIngredients = this.fetchIngredients.bind(this);
+    this.toggleMenuActiveStatus = this.toggleMenuActiveStatus.bind(this);
   }
   componentDidMount() {
     this.fetchMenuItems();
@@ -24,6 +26,26 @@ class MenuItemList extends Component {
 
   componentWillUnmount() {
     clearInterval(this.retrieveMenuitems)
+  }
+
+  toggleMenuActiveStatus(id, status) {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken')
+      },
+      body: JSON.stringify({is_active: status}),
+    }
+    fetch(`/api/v1/menu/${id}/`, options).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+        const menuitems = [...this.state.menuitems];
+        const index = menuitems.findIndex(menuitem => menuitem.id === id);
+        menuitems[index].is_active = status;
+        this.setState({ menuitems });
+      });
   }
 
 
@@ -60,13 +82,22 @@ class MenuItemList extends Component {
   }
 
   addMenuItem(menuitem) {
+    let formData = new FormData();
+    if(menuitem instanceof File) {
+      formData.append('image', menuitem.image);
+    }
+
+    formData.append('name', menuitem.name);
+    formData.append('menu_price', menuitem.menu_price);
+    formData.append('ingredients', JSON.stringify(menuitem.ingredients));
+
+
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'X-CSRFToken': Cookies.get('csrftoken')
       },
-      body: JSON.stringify(menuitem)
+      body: formData,
     }
     fetch('/api/v1/menu/', options).then(response => {
       if (!response.ok) {
@@ -83,11 +114,9 @@ class MenuItemList extends Component {
     }).catch()
   }
 
-  editMenuItem(id, name) {
-    const menuitem = {
-      id: id,
-      name: name
-    }
+  editMenuItem(menuitem) {
+    const {id} = menuitem;
+
     const options = {
       method: 'PUT',
       headers: {
@@ -116,6 +145,7 @@ class MenuItemList extends Component {
       <EditMenuItem
         key={menuitem.id}
         menuitem={menuitem}
+        toggleMenuActiveStatus={this.toggleMenuActiveStatus}
         editMenuItem= {this.editMenuItem} />));
 
     return(
@@ -140,7 +170,10 @@ class MenuItemList extends Component {
         </Accordion>
         <ul className='container menuitems'>
           {menuItems}
+
         </ul>
+        <IngredientsModal />
+
       </div>
       </>
     );
