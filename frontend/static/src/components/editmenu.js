@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Cookies from 'js-cookie';
+import { withRouter} from 'react-router-dom';
 
 class EditMenuItem extends Component {
   constructor(props){
@@ -10,8 +11,11 @@ class EditMenuItem extends Component {
       name: this.props.menuitem.name,
     }
     this.editMenuItem = this.editMenuItem.bind(this);
-    this.inputMenuItem = this.inputMenuItem.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.toggleMenuActiveStatus = this.toggleMenuActiveStatus.bind(this);
   }
+
+
 
 editMenuItem() {
   this.setState({ isEditing: false});
@@ -24,22 +28,32 @@ editMenuItem() {
   this.props.editMenuItem(menuitem.id, menuitem.name);
 }
 
-inputMenuItem(event){
+handleInput(event){
   this.setState({ [event.target.name]:  event.target.value});
 }
-// <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.inputMenuItem} />
+
+toggleMenuActiveStatus() {
+  const {id, is_active} = this.state;
+  this.props.toggleMenuActiveStatus(id, !is_active);
+  this.setState({
+    is_active: !is_active,
+  });
+}
+// <input type="text" name='ingredient' value={this.props.ingredient} onChange={this.handleInput} />
 render() {
   const menuitem = this.props.menuitem;
+  const ingredient = this.props.ingredients;
+  const { is_active, isEditing,} = this.state;
   return(
+
+
     <li className='list'>
     {
       this.state.isEditing
       ?
         <>
-          <input type="text" name='name' value={this.state.name} onChange={this.inputMenuItem}/>
-
-        </>
-
+      <input type="text" name='name' value={this.state.name} onChange={this.handleInput}/>
+      </>
       : <p>{this.state.name}</p>
     }
     {
@@ -47,9 +61,16 @@ render() {
       ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
       : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
     }
-    {<button className ="btn btn-danger" type="button" onClick={() => this.props.deleteMenuItem(menuitem.id)}>x</button>}
+    {
+      <button className ="toggle-button" type="button" onClick={this.toggleMenuActiveStatus}>
+    {
+      is_active
+      ? <button className='btn btn-primary'>Active</button>
+      : <button className='btn btn-danger'>Inactive</button>
+    }</button>
+  }
     </li>
   )}
 }
 
-export default EditMenuItem;
+export default withRouter(EditMenuItem);

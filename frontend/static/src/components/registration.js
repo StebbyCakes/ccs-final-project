@@ -25,7 +25,7 @@ handleSubmit(event){
 
    render() {
      return(
-     <form onSubmit={this.handleSubmit}>
+     <form className='login-form' onSubmit={this.handleSubmit}>
    <div className="mb-3">
      <label htmlFor="username" className="form-label">Username</label>
      <input onChange={this.handleInput} type="text" className="form-control" id="username" name='username'></input>
@@ -42,8 +42,7 @@ handleSubmit(event){
      <label htmlFor="password2" className="form-label">Confirm Password</label>
      <input onChange={this.handleInput} type="password" className="form-control" id="password2" name='password2'></input>
    </div>
-   <button type="button" className="btn btn-link" onClick={() => this.props.handleNavigation('login')}>Login</button>
-   <button type="submit" className="btn btn-primary">REGISTER</button>
+   <button type="submit" className="add-ingredient">REGISTER</button>
  </form>
 )}
 

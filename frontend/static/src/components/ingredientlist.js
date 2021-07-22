@@ -19,7 +19,6 @@ class IngredientList extends Component {
   componentDidMount() {
     this.fetchIngredients();
   }
-
   fetchIngredients() {
     fetch('/api/v1/menu/ingredients/').then(response => {
       if (!response.ok) {
@@ -27,9 +26,15 @@ class IngredientList extends Component {
       }
       return response.json();
     })
-    .then(data => this.setState({ingredients: data}));
+    .then(data => {
+      data.forEach(ingredient => {
+        ingredient.price_listings.forEach(price => {
+          price.price_per_pound = (price.price_per_pound / 100);
+        });
+      });
+      this.setState({ingredients: data})
+    });
   }
-
   toggleIngredientActiveStatus(id, status) {
     console.log('status', status)
     const options = {
@@ -40,7 +45,6 @@ class IngredientList extends Component {
       },
       body: JSON.stringify({is_active: status}),
     }
-
     fetch(`/api/v1/menu/ingredients/${id}/`, options).then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -51,7 +55,6 @@ class IngredientList extends Component {
         this.setState({ ingredients });
       });
     }
-
   addIngredient(ingredient) {
     const options = {
       method: 'POST',
@@ -67,14 +70,25 @@ class IngredientList extends Component {
       }
       return response.json();
     }).then(data => {
+      console.log('data', data)
+      const price_listings = data.price_listings.map(price_listing => {
+        price_listing.price_per_pound = (price_listing.price_per_pound / 100).toFixed(2);
+        return price_listing
+      });
+
+      data.price_listings = price_listings;
+
+      // const ingredient = data.price_listings.map(price_listing => {
+      //   price_listing.price_per_pound = price_listing.price_per_pound / 100;
+      //   return price_listing;
+      // })
       const ingredients = [
         ...this.state.ingredients,
-        data
+        data,
       ];
       this.setState({ingredients});
     }).catch()
   }
-
 // I think this is similar issue I had a while back where the id doesnt have one 'true' place to relate back to. So editing the same ingredient a second time causes problems
   editIngredient(ingredient) {
     const {id} = ingredient;
@@ -100,54 +114,50 @@ class IngredientList extends Component {
       this.setState({ ingredients });
     });
   }
-
-
   render() {
     const activeIngredients = this.state.ingredients
       .filter(ingredient => ingredient.is_active);
-
     const ingredients = this.state.ingredients.map((ingredient) => (
       <EditIngredient key={ingredient.id} ingredient={ingredient} toggleIngredientActiveStatus={this.toggleIngredientActiveStatus} editIngredient={this.editIngredient}/>
     ));
     return (
       <>
       <div className='ingredient-container'>
-        <h2>Create Ingredient</h2>
-        <CreateIngredient addIngredient={this.addIngredient} ingredients={this.state.ingredients}/>
+        <h2 className='ingredient-title'>Ingredient List</h2>
           <Accordion>
             <Card className='accordion-card'>
               <Card.Header className='accordion-header'>
                 <Accordion.Toggle as={Button}  eventKey="0">
                   <span className='accordion-toggle'>
-                    Update Ingredient Price
+                    Create Ingredient
                   </span>
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
-                  <IngredientPriceChangeForm ingredients={activeIngredients} editIngredient={this.editIngredient}/>
+                  <CreateIngredient addIngredient={this.addIngredient} ingredients={this.state.ingredients}/>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
           </Accordion>
-        <h2 className='ingredient-title'>Ingredient List</h2>
         <div className='table-responsive'>
           <table class='table'>
             <thead>
              <tr>
                <th scope="col">Ingredients</th>
                <th scope="col">Price</th>
-               <th scope="col">Edit</th>
-               <th scope="col">Active / Inactive</th>
+               <th scope="col">Effective Date</th>
+               <th scope="col"></th>
+               <th scope="col">Price Change</th>
+               <th scope="col">Effective Date</th>
+               <th scope="col"></th>
              </tr>
              </thead>
              <tbody>
               {ingredients}
              </tbody>
-
           </table>
         </div>
-
         </div>
       </>
     )

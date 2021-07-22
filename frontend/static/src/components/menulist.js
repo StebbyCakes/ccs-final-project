@@ -26,6 +26,7 @@ class MenuItemList extends Component {
     clearInterval(this.retrieveMenuitems)
   }
 
+
   fetchMenuItems() {
     fetch('/api/v1/menu/').then(response => {
       if (!response.ok) {
@@ -109,14 +110,18 @@ class MenuItemList extends Component {
   render() {
 
     const menuItems = this.state.menuitems.map((menuitem) => (
+    // const menu_price = {this.props.menu_price}
+      // ingredients = this.state.ingredients
+      // ingredients={this.ingredients}
       <EditMenuItem
         key={menuitem.id}
         menuitem={menuitem}
-        deleteMenuItem={this.deleteMenuItem}
         editMenuItem= {this.editMenuItem} />));
 
-    return (
+    return(
+    <>
       <div className='menu-form'>
+        <h2 className='menu-list' >Menu Item List</h2>
         <Accordion>
           <Card className='accordion-card'>
             <Card.Header className='accordion-header'>
@@ -133,11 +138,11 @@ class MenuItemList extends Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-
         <ul className='container menuitems'>
           {menuItems}
         </ul>
       </div>
+      </>
     );
   }
 }

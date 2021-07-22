@@ -1,6 +1,8 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
 
+import defaultImage from './../assets/images/default-image.jpeg';
+
 class CreateMenuItem extends Component {
   constructor(props){
     super(props);
@@ -8,18 +10,17 @@ class CreateMenuItem extends Component {
       availableIngredients: this.props.availableIngredients,
 
       preview: '',
-
       name: '',
       menu_price: '',
-      ingredients: {
-
-      },
+      ingredients: {},
       image: null,
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
+    this.handleImage = this.handleImage.bind(this);
+    this.handleIMGSubmit = this.handleIMGSubmit.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -30,6 +31,39 @@ class CreateMenuItem extends Component {
     }
   }
 
+  handleImage(event){
+    let file = event.target.files[0]
+    this.setState({
+      menuImg: file,
+    })
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      this.setState({
+        preview: reader.result,
+      });
+    }
+
+    reader.readAsDataURL(file);
+  }
+
+  async handleIMGSubmit(event){
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append('menuImg', this.state.menuImg);
+    formData.append('menuitem', this.state.menuitem);
+
+    const options = {
+      method: 'PUT',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: formData,
+    }
+    const response = await fetch('/api/v1/menu/', options);
+    this.props.history.push('/menulist')
+    console.log(response)
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -38,14 +72,14 @@ class CreateMenuItem extends Component {
     const menuitem = {
       name,
       ingredients,
-      menu_price,
+      menu_price: Number(menu_price) * 100,
     };
 
     this.props.addMenuItem(menuitem);
 
     this.setState({
       name: '',
-      menu_price: 1100,
+      menu_price: '',
       ingredients: {
       },
     });
@@ -88,7 +122,15 @@ class CreateMenuItem extends Component {
         <ul className='ingredient-grid'>
           {ingredients}
         </ul>
-        <button className='create-menu-button' type="submit">Create menu item</button>
+        <img src={defaultImage} alt=""/>
+          <input type="file" name='menuImg' onChange={this.handleImage}/>
+          <button type='button' onclick={this.handleIMGSubmit}>Save</button>
+          {this.state.menuImg
+          ? <img className='img'src={this.state.preview} alt="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartialartsplusinc.com%2Fhome%2Fdefault-image%2F&psig=AOvVaw2_wxZFvSEbu5shUuae6NFO&ust=1627012298162000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMj6nbLj9fECFQAAAAAdAAAAABAD"/>
+          : null
+          }
+        <button className='add-ingredient' type="submit">Create menu item</button>
+
         </form>
 
       </>

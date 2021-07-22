@@ -37,7 +37,7 @@ handleSubmit(event){
      <label htmlFor="password" className="form-label">Password</label>
      <input onChange={this.handleInput} type="password" className="form-control" id="password" name='password'></input>
    </div>
-   <button type="submit" className="btn btn-success">Login</button>
+   <button type="submit" className="add-ingredient">Login</button>
    </form>
 )}
 }

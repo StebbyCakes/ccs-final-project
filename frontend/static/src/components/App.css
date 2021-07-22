@@ -23,10 +23,11 @@
 } */
 
 .login-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 250px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
 }
 
 .form-label{
@@ -50,7 +51,6 @@
 .menuCost{
   font-size: 20px;
   color: white;
-
   background-color: transparent;
   box-sizing: content-box;
   width: 100%;
@@ -78,7 +78,7 @@ li{
 }
 
 
-ul p:hover + button{
+/* ul p:hover + button{
   display: inline!important;
 }
 
@@ -89,12 +89,19 @@ ul .list button {
 
 ul .list:hover button {
   display: block;
-}
+} */
 
 /* Ingredient page */
 .accordion-card.card{
   background-color: transparent;
   border: none;
+}
+
+.ingredient-input{
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 20px;
+    max-height: 15px;
 }
 
 .accordion-header.card-header{
@@ -103,7 +110,7 @@ ul .list:hover button {
 }
 
 .ingredient-container {
-  width: 60%;
+  width: 90%;
   background-color: #F6F2EB;
   margin: 25px auto;
   padding: 25px;
@@ -140,8 +147,8 @@ ul .list:hover button {
 
 .add-ingredient{
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #791562;
+  border-color: #791562;
   border: 1px solid transparent;
   padding: .375rem .75rem;
   font-size: 1rem;
@@ -179,6 +186,10 @@ ul .list:hover button {
 
 .menuitems{
   display: table;
+}
+
+.menu-list{
+  margin: 15px;
 }
 
 .ingredient-grid {
