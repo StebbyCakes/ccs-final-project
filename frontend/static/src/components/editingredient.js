@@ -88,16 +88,7 @@ class EditIngredient extends Component {
       [event.target.name]: event.target.value
     });
   }
-  findCurrentPriceListing() {
-    const current_price_listing = this.state.price_listings.reduce(function(prev, current) {
-      return (new Date(prev.start_date) > new Date(current.start_date))
-        ? prev
-        : current;
-    });
-    // is this info just for the db and future graph or need to display in ingredients?
-    console.log('here', current_price_listing)
-    return current_price_listing;
-  }
+
   render() {
     const {name, price_per_pound, start_date, is_active, isEditing} = this.state;
     return (<tr>

@@ -49,9 +49,18 @@ class Homepage extends Component {
     }
 
   fetchIngredients() {
-      const response = fetch('/api/v1/menu/')
+      const response = fetch('/api/v1/menu/ingredients/')
       .then(data => data.json())
-      .then(json => this.setState({ingredients: json}))
+      .then(json => {
+        json.forEach(ingredient => {
+          ingredient.price_listings = ingredient.price_listings.reduce((prev, current) => {
+            return (new Date(prev.start_date) > new Date(current.start_date))
+              ? prev
+              : current;
+          });
+        });
+        this.setState({ingredients: json});
+      });
     }
 
 
@@ -63,14 +72,25 @@ class Homepage extends Component {
 
   calculateMenuItemCost(menuitem){
     if (this.state.ingredients.length == 0) return 0;
-    return menuitem.ingredients.reduce(( sum, ingredient) => {
-      const globalIngredient = this.state.ingredients.find(item => {
-        return item.name  == ingredient.name
-      })
-      const ingredientLb = (parseFloat(ingredient.weight_of_ingredient) * (0.0022046226))
-      const ingredientCost = ((ingredientLb) * (parseFloat(globalIngredient.price_per_pound)))
-      return sum + ingredientCost
-    }, 0);
+      const ingredients = Object.entries(menuitem.ingredients); // [[onitions, 2], [tomatoes, 3]]
+
+      return ingredients.reduce((sum, ingredient) => {
+        const ingredientName = ingredient[0];
+        // console.log('ingredient', ingredient[0])
+        const ingredientLb = ingredient[1] * 0.0022046226;
+        const ingredientPricePerPound = this.state.ingredients.find(ingredient => ingredient.name === ingredientName).price_listings.price_per_pound;
+        const ingredientCost = ingredientLb * ingredientPricePerPound;
+        return sum + ingredientCost;
+      },0);
+
+    // return menuitem.ingredients.reduce(( sum, ingredient) => {
+    //   const globalIngredient = this.state.ingredients.find(item => {
+    //     return item.name  == ingredient.name
+    //   })
+    //   const ingredientLb = (parseFloat(ingredient.weight_of_ingredient) * (0.0022046226))
+    //   const ingredientCost = ((ingredientLb) * (parseFloat(globalIngredient.price_per_pound)))
+    //   return sum + ingredientCost
+    // }, 0);
   }
 
 
@@ -78,8 +98,11 @@ class Homepage extends Component {
     const data = [];
 
     const displayMenuItems = this.state.menuitems.map((menuitem) => {
+      console.log('whate', menuitem)
       menuName = menuitem.name
-      price = this.calculateMenuItemCost(menuitem);
+      const price = this.calculateMenuItemCost(menuitem);
+      console.log('price', price)
+      // console.log('price', price.toFixed(2))
       data.push({
         name: menuName,
         uv: price,
