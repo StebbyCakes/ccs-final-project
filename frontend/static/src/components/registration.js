@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import defaultImage from './../assets/images/foodbook.jpeg';
 
 class Registration extends Component {
   constructor(props) {
@@ -25,6 +26,8 @@ handleSubmit(event){
 
    render() {
      return(
+       <>
+       <img className='foodbook-img' src={defaultImage}/>
      <form className='login-form' onSubmit={this.handleSubmit}>
    <div className="mb-3">
      <label htmlFor="username" className="form-label">Username</label>
@@ -44,6 +47,7 @@ handleSubmit(event){
    </div>
    <button type="submit" className="add-ingredient">REGISTER</button>
  </form>
+ </>
 )}
 
 }

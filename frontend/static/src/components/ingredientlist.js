@@ -134,8 +134,8 @@ class IngredientList extends Component {
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <CreateIngredient addIngredient={this.addIngredient} ingredients={this.state.ingredients}/>
+                <Card.Body >
+                  <CreateIngredient className='ingredient-form' addIngredient={this.addIngredient} ingredients={this.state.ingredients}/>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>

@@ -27,7 +27,7 @@
   top: 30%;
   left: 50%;
   transform: translateY(-50%);
-  transform: translateX(-50%);
+  transform: translateX(50%);
 }
 
 .form-label{
@@ -109,10 +109,16 @@ ul .list:hover button {
   border: none;
 }
 
+
+
 .ingredient-form{
   display: flex;
   flex-direction: column;
-  max-width: 200px;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+  margin-bottom: 35px;
 }
 
 .ingredient-input{
@@ -120,12 +126,16 @@ ul .list:hover button {
     border: 1px solid black;
     padding: 20px;
     max-height: 15px;
+    margin: 10px;
+
 }
 
 .accordion-header.card-header{
   background-color: transparent;
   border: none;
 }
+
+
 
 .ingredient-container {
   width: 90%;
@@ -176,7 +186,8 @@ ul .list:hover button {
   font-size: 1rem;
   line-height: 1.2;
   border-radius: .25rem;
-  transition: color .15s
+  transition: color .15s;
+  margin: 10px;
 }
 /* End of Ingredient page form */
 
@@ -201,6 +212,10 @@ ul .list:hover button {
 }
 
 .create-menu-box{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
   text-align: center;
   margin: 20px;
   margin-bottom: 35px;
@@ -270,4 +285,10 @@ margin: 20px;
 padding-top: 50px;
 font-size: 130px;
 font-weight: bold;
+}
+
+.foodbook-img{
+  padding: 0px;
+  margin: 10px;
+  margin-top: 70px;
 }

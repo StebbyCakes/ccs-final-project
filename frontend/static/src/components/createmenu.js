@@ -115,10 +115,11 @@ class CreateMenuItem extends Component {
     return(
       <>
       <form  onSubmit={this.handleSubmit}>
-        <div className='ingredient-form'>
+        <div className='create-menu-box'>
+          <button className='add-ingredient' type="submit">Create menu item</button>
           <input className='ingredient-input' type="text" name='name' value={this.state.name} placeholder="Menu Item Name" onChange={this.handleInput} />
           <input className='ingredient-input' type="text" name='menu_price' value={this.state.menu_price} placeholder="Price on Menu" onChange={this.handleInput} />
-          <button className='add-ingredient' type="submit">Create menu item</button>
+
         </div>
         <ul className='ingredient-grid'>
           {ingredients}

@@ -4,7 +4,7 @@ import './App.css';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import defaultImage from './../assets/images/foodbook.jpeg';
+
 
 const { REACT_APP_SPOONACULAR_API_KEY } = process.env
 
