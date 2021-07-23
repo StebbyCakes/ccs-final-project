@@ -1,6 +1,10 @@
 import { Component } from 'react';
 import Cookies from 'js-cookie';
 import { withRouter} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import defaultImage from './../assets/images/default-image.jpeg';
+
 
 class EditMenuItem extends Component {
   constructor(props){
@@ -8,11 +12,21 @@ class EditMenuItem extends Component {
     this.state = {
       ...this.props.menuitem,
       isEditing: false,
+      show: false,
 
     }
     this.editMenuItem = this.editMenuItem.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.toggleMenuActiveStatus = this.toggleMenuActiveStatus.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+  }
+  handleClose() {
+    this.setState({show: false});
+  }
+
+  handleShow() {
+    this.setState({show: true});
   }
 
 
@@ -52,6 +66,7 @@ render() {
     <li key={index}>
       <p>{ingredient[0]}</p>
       <p>{ingredient[1]}</p>
+
     </li>
   ));
 
@@ -64,25 +79,72 @@ render() {
       this.state.isEditing
       ?
         <>
-      <input type="text" name='name' value={this.state.name} onChange={this.handleInput}/>
+
+        <div className="card menuitem">
+        <p className='menu-title'><input type="text" name='name' value={this.state.name} onChange={this.handleInput}/></p>
+        {
+          this.state.isEditing
+          ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
+          : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
+        }
+        <Button variant="warning" onClick={this.handleShow}>
+          See Ingredients
+        </Button>
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Ingredients</Modal.Title>
+          </Modal.Header>
+          <Modal.Body><div>{ingredients}</div></Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={this.handleClose}>
+              Exit
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+
       </>
-    : <><p>{this.state.name}</p>{ingredients}</>
+    : <>
+    <div className="card menuitem">
+    <p className='menu-title'>{this.state.name}</p>
+      {
+        this.state.isEditing
+        ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
+        : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
+      }
+
+    <Button variant="warning" onClick={this.handleShow}>
+      See Ingredients
+    </Button>
+
+    <Modal show={this.state.show} onHide={this.handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Ingredients</Modal.Title>
+      </Modal.Header>
+      <Modal.Body><div className='included-ingredients'>{ingredients}</div></Modal.Body>
+      <Modal.Footer>
+        <Button variant="danger" onClick={this.handleClose}>
+          Exit
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </div>
+
+      </>
     }
-    {
-      this.state.isEditing
-      ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
-      : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
-    }
-    {
-      <button className ="toggle-button" type="button" onClick={this.toggleMenuActiveStatus}>
-    {
-      is_active
-      ? <button className='btn btn-primary'>Active</button>
-      : <button className='btn btn-danger'>Inactive</button>
-    }</button>
-  }
+
     </li>
   )}
 }
 
 export default withRouter(EditMenuItem);
+
+// {
+//   <button className ="toggle-button" type="button" onClick={this.toggleMenuActiveStatus}>
+// {
+//   is_active
+//   ? <button className='btn btn-primary'>Active</button>
+//   : <button className='btn btn-danger'>Inactive</button>
+// }</button>
+// }

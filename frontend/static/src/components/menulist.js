@@ -168,11 +168,14 @@ class MenuItemList extends Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-        <ul className='container menuitems'>
-          {menuItems}
+
+        <ul className='container-menuitems'>
+
+            {menuItems}
 
         </ul>
-        <IngredientsModal />
+
+
 
       </div>
       </>

@@ -104,7 +104,6 @@ class CreateMenuItem extends Component {
   }
 
   render(){
-    console.log('here', this.props.availableIngredients)
     const ingredients = this.state.availableIngredients?.map(ingredient =>
       <>
         <li key={ingredient.id} className="mb-3">
@@ -116,9 +115,10 @@ class CreateMenuItem extends Component {
     return(
       <>
       <form  onSubmit={this.handleSubmit}>
-        <div className='create-menu-box'>
-          <input type="text" name='name' value={this.state.name} placeholder="Menu Item Name" onChange={this.handleInput} />
-          <input type="text" name='menu_price' value={this.state.menu_price} placeholder="Price on Menu" onChange={this.handleInput} />
+        <div className='ingredient-form'>
+          <input className='ingredient-input' type="text" name='name' value={this.state.name} placeholder="Menu Item Name" onChange={this.handleInput} />
+          <input className='ingredient-input' type="text" name='menu_price' value={this.state.menu_price} placeholder="Price on Menu" onChange={this.handleInput} />
+          <button className='add-ingredient' type="submit">Create menu item</button>
         </div>
         <ul className='ingredient-grid'>
           {ingredients}
@@ -129,7 +129,7 @@ class CreateMenuItem extends Component {
           ? <img className='img' src={this.state.preview} alt="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartialartsplusinc.com%2Fhome%2Fdefault-image%2F&psig=AOvVaw2_wxZFvSEbu5shUuae6NFO&ust=1627012298162000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMj6nbLj9fECFQAAAAAdAAAAABAD"/>
           : null
           }
-        <button className='add-ingredient' type="submit">Create menu item</button>
+
 
         </form>
 

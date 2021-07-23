@@ -49,13 +49,17 @@
 }
 
 .menuCost{
+
+  text-align: center;
   font-size: 20px;
-  color: white;
+  color: black;
   background-color: transparent;
   box-sizing: content-box;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  width: 25%;
+  display: inline-table;
+  border: 2px solid black;
+  margin: 5px;
+  transform: translateX(42%);
 }
 
 .preview-img{
@@ -80,6 +84,9 @@
 
 li{
   list-style-type: none;
+  position: relative!important;
+  display:inline-table;
+  padding: 20px;
 }
 
 
@@ -153,7 +160,11 @@ ul .list:hover button {
 }
 
 .ingredient-title{
-  margin: 15px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+
 }
 
 .add-ingredient{
@@ -195,12 +206,12 @@ ul .list:hover button {
   margin-bottom: 35px;
 }
 
-.menuitems{
-  display: table;
-}
-
 .menu-list{
-  margin: 15px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+
 }
 
 .ingredient-grid {
@@ -211,4 +222,52 @@ ul .list:hover button {
 
 label{
   font-weight: bolder;
+}
+
+.menu-title{
+  font-weight: bold;
+}
+.menuitem{
+  width: 10rem;
+}
+
+
+.card-img-top{
+  max-height: 200px;
+}
+
+
+.homepage{
+  width: 90%;
+  background-color: #F6F2EB;
+  margin: 25px auto;
+
+}
+
+.ingredient-name{
+  font-weight: bold;
+  text-align: center;
+}
+
+.included-ingredients{
+  display: flex;
+  flex-direction: row;
+}
+
+header{
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+  margin-top: 50px;
+}
+
+.foodbook-title{
+
+display: flex;
+justify-content: center;
+margin: 20px;
+padding-top: 50px;
+font-size: 130px;
+font-weight: bold;
 }

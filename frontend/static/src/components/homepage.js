@@ -4,6 +4,7 @@ import './App.css';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import defaultImage from './../assets/images/foodbook.jpeg';
 
 const { REACT_APP_SPOONACULAR_API_KEY } = process.env
 
@@ -79,7 +80,9 @@ class Homepage extends Component {
         // console.log('ingredient', ingredient[0])
         const ingredientLb = ingredient[1] * 0.0022046226;
         const ingredientPricePerPound = this.state.ingredients.find(ingredient => ingredient.name === ingredientName).price_listings.price_per_pound;
-        const ingredientCost = ingredientLb * ingredientPricePerPound;
+        const ingredientCost = ingredientLb * (ingredientPricePerPound / 100);
+        console.log(ingredientPricePerPound)
+
         return sum + ingredientCost;
       },0);
 
@@ -98,36 +101,36 @@ class Homepage extends Component {
     const data = [];
 
     const displayMenuItems = this.state.menuitems.map((menuitem) => {
-      console.log('whate', menuitem)
       menuName = menuitem.name
       const price = this.calculateMenuItemCost(menuitem);
-      console.log('price', price)
-      // console.log('price', price.toFixed(2))
       data.push({
         name: menuName,
-        uv: price,
+        price: price,
       });
-      newPrice  = parseFloat(price)
+      newPrice  = parseFloat(price).toFixed(2)
       return (
 
         <div className='menuCost'>
         {menuName}
         <h1></h1>
-        ${price}
         <p></p>
+        ${newPrice}
       </div>
 
     )})
     return(
 
       <>
+      <div className='homepage'>
+      <h2 className='foodbook-title'>FoodBook</h2>
         <div >
           <ul >
             {displayMenuItems}
           </ul>
         </div>
+        <header>Cost per Plate </header>
         <BarChart
-          width= {1400}
+          width= {1200}
           height={500}
           data={data}
           margin={{
@@ -140,11 +143,10 @@ class Homepage extends Component {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="uv" fill="#82ca9d" />
+          <Tooltip/>
+          <Bar dataKey="price" fill="#82ca9d" />
         </BarChart>
-
+        </div>
       </>
     )}}
 
