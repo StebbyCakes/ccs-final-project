@@ -82,12 +82,28 @@
 }
 
 
-li{
+.list{
   list-style-type: none;
-  position: relative!important;
+  position: relative;
   display:inline-table;
   padding: 20px;
 }
+
+.ingredients-on-menu{
+  list-style-type: none;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.ingredient-name{
+  display: relative;
+}
+.available-ingredients{
+  list-style-type: none;
+}
+
 
 
 /* ul p:hover + button{
@@ -266,7 +282,7 @@ label{
 
 .included-ingredients{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 header{

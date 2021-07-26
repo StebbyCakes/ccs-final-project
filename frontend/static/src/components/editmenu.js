@@ -13,7 +13,8 @@ class EditMenuItem extends Component {
       ...this.props.menuitem,
       isEditing: false,
       show: false,
-
+      ingredientName: '',
+      ingredientWeight: '',
     }
     this.editMenuItem = this.editMenuItem.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -28,7 +29,6 @@ class EditMenuItem extends Component {
   handleShow() {
     this.setState({show: true});
   }
-
 
 
 editMenuItem() {
@@ -61,32 +61,21 @@ render() {
   const { is_active, isEditing} = this.state;
 
 
-  const ingredients = Object.entries(this.state.ingredients) // [[onions, 22], [tomatoes, 23]];
-  ingredients.map((ingredient, index) => (
-    <li key={index}>
-      <p>{ingredient[0]}</p>
-      <p>{ingredient[1]}</p>
-
+  let ingredients = Object.entries(this.state.ingredients) // [[onions, 22], [tomatoes, 23]];
+  console.log('ingredients', ingredients)
+  ingredients = ingredients.map((ingredient, index) => (
+    <li key={index} className='ingredients-on-menu'>
+      <span className='ingredient-name'>{ingredient[0]}</span>
+      <input type="text" value={ingredient[1]}/>
     </li>
   ));
 
 
   return(
-
-
     <li className='list'>
-    {
-      this.state.isEditing
-      ?
-        <>
-
         <div className="card menuitem">
-        <p className='menu-title'><input type="text" name='name' value={this.state.name} onChange={this.handleInput}/></p>
-        {
-          this.state.isEditing
-          ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
-          : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
-        }
+        <input type="text" name='name' value={this.state.name} onChange={this.handleInput}/>
+
         <Button variant="warning" onClick={this.handleShow}>
           See Ingredients
         </Button>
@@ -103,37 +92,6 @@ render() {
           </Modal.Footer>
         </Modal>
       </div>
-
-      </>
-    : <>
-    <div className="card menuitem">
-    <p className='menu-title'>{this.state.name}</p>
-      {
-        this.state.isEditing
-        ? <button className="btn btn-dark" type='button' onClick={this.editMenuItem}>Save Edit</button>
-        : <button className ="btn btn-dark" type="button" onClick={() => this.setState({ isEditing: true})}>Edit</button>
-      }
-
-    <Button variant="warning" onClick={this.handleShow}>
-      See Ingredients
-    </Button>
-
-    <Modal show={this.state.show} onHide={this.handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Ingredients</Modal.Title>
-      </Modal.Header>
-      <Modal.Body><div className='included-ingredients'>{ingredients}</div></Modal.Body>
-      <Modal.Footer>
-        <Button variant="danger" onClick={this.handleClose}>
-          Exit
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  </div>
-
-      </>
-    }
-
     </li>
   )}
 }

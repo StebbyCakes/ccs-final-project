@@ -170,9 +170,7 @@ class MenuItemList extends Component {
         </Accordion>
 
         <ul className='container-menuitems'>
-
             {menuItems}
-
         </ul>
 
 

@@ -106,7 +106,7 @@ class CreateMenuItem extends Component {
   render(){
     const ingredients = this.state.availableIngredients?.map(ingredient =>
       <>
-        <li key={ingredient.id} className="mb-3">
+        <li key={ingredient.id} className="mb-3 available-ingredients">
           <label htmlFor={ingredient.name}>{ingredient.name}</label>
           <input type="text" id={ingredient.name} name={ingredient.name} value={this.state[ingredient.name]} placeholder='Weight in Grams' onChange={this.handleIngredient}/>
         </li>
