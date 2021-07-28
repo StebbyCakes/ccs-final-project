@@ -18,6 +18,7 @@ class MenuItemList extends Component {
     this.addMenuItem = this.addMenuItem.bind(this);
     this.fetchIngredients = this.fetchIngredients.bind(this);
     this.toggleMenuActiveStatus = this.toggleMenuActiveStatus.bind(this);
+    this.deleteIngredient = this.deleteIngredient.bind(this);
   }
   componentDidMount() {
     this.fetchMenuItems();
@@ -26,6 +27,23 @@ class MenuItemList extends Component {
 
   componentWillUnmount() {
     clearInterval(this.retrieveMenuitems)
+  }
+
+  deleteIngredient(id, ingredients) {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: JSON.stringify({ingredients}),
+    };
+    fetch(`/api/v1/menu/${id}/`, options);
+
+    const menuItems = [...this.state.menuitems];
+    const index = menuItems.findIndex(menuItem => menuItem.id === id);
+    menuItems[index].ingredients = ingredients;
+    this.setState({ menuitems: menuItems });
   }
 
   toggleMenuActiveStatus(id, status) {
@@ -139,19 +157,17 @@ class MenuItemList extends Component {
   render() {
 
     const menuItems = this.state.menuitems.map((menuitem) => (
-    // const menu_price = {this.props.menu_price}
-      // ingredients = this.state.ingredients
-      // ingredients={this.ingredients}
       <EditMenuItem
         key={menuitem.id}
         menuitem={menuitem}
+        deleteIngredient={this.deleteIngredient}
         toggleMenuActiveStatus={this.toggleMenuActiveStatus}
         editMenuItem= {this.editMenuItem} />));
 
     return(
     <>
       <div className='menu-form'>
-        <h2 className='menu-list' >Menu Item List</h2>
+        <h2 className='menu-list'>Menu Item List</h2>
         <Accordion>
           <Card className='accordion-card'>
             <Card.Header className='accordion-header'>
