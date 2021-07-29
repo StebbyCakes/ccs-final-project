@@ -18,7 +18,7 @@ class MenuItemList extends Component {
     this.addMenuItem = this.addMenuItem.bind(this);
     this.fetchIngredients = this.fetchIngredients.bind(this);
     this.toggleMenuActiveStatus = this.toggleMenuActiveStatus.bind(this);
-    this.deleteIngredient = this.deleteIngredient.bind(this);
+    this.updateIngredient = this.updateIngredient.bind(this);
   }
   componentDidMount() {
     this.fetchMenuItems();
@@ -29,8 +29,9 @@ class MenuItemList extends Component {
     clearInterval(this.retrieveMenuitems)
   }
 
-  deleteIngredient(id, ingredients) {
+  updateIngredient(id, ingredients) {
     const options = {
+      // doing a patch request instead of delete because i'm just updating the new list of ingredients on the menuitem
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -39,8 +40,9 @@ class MenuItemList extends Component {
       body: JSON.stringify({ingredients}),
     };
     fetch(`/api/v1/menu/${id}/`, options);
-
+    // targeting a specific menuitem to identify which one is getting updated
     const menuItems = [...this.state.menuitems];
+    // making a copy of all the info in regards to all menuitems
     const index = menuItems.findIndex(menuItem => menuItem.id === id);
     menuItems[index].ingredients = ingredients;
     this.setState({ menuitems: menuItems });
@@ -153,14 +155,15 @@ class MenuItemList extends Component {
       this.setState({menuitems});
     });
   }
-
+// added deleteIngredient into render so that I can call it through props for editMenuItem
   render() {
 
     const menuItems = this.state.menuitems.map((menuitem) => (
       <EditMenuItem
         key={menuitem.id}
         menuitem={menuitem}
-        deleteIngredient={this.deleteIngredient}
+        ingredients={this.state.ingredients}
+        updateIngredient={this.updateIngredient}
         toggleMenuActiveStatus={this.toggleMenuActiveStatus}
         editMenuItem= {this.editMenuItem} />));
 
