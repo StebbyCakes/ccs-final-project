@@ -123,7 +123,7 @@ class IngredientList extends Component {
     return (
       <>
       <div className='ingredient-container'>
-        <h2 className='ingredient-title'>Ingredient List</h2>
+        <h2 className='ingredient-header'>Ingredient List</h2>
           <Accordion>
             <Card className='accordion-card'>
               <Card.Header className='accordion-header'>
