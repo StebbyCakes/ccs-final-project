@@ -29,7 +29,7 @@ class Homepage extends Component {
   }
 
   componentDidMount(){
-    // this.fetchJoke();
+    this.fetchJoke();
     this.fetchData();
     this.fetchIngredients();
 
@@ -81,7 +81,6 @@ class Homepage extends Component {
         const ingredientLb = ingredient[1] * 0.0022046226;
         const ingredientPricePerPound = this.state.ingredients.find(ingredient => ingredient.name === ingredientName).price_listings.price_per_pound;
         const ingredientCost = ingredientLb * (ingredientPricePerPound / 100);
-        console.log(ingredientPricePerPound)
 
         return sum + ingredientCost;
       },0);

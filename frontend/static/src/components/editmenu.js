@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import Cookies from 'js-cookie';
 import { withRouter} from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import defaultImage from './../assets/images/default-image.jpeg';
+import {Accordion, Button, Card} from 'react-bootstrap';
 
 
 class EditMenuItem extends Component {
@@ -156,9 +156,9 @@ render() {
 
       <span className='ingredient-name'>{ingredient[0]}</span>
       <div>
-        <input type="text" name={ingredient[0]} value={ingredient[1]} onChange={this.updateIngredientWeight}/>
+        <input className='ingredient-weight' type="text" name={ingredient[0]} value={ingredient[1]} onChange={this.updateIngredientWeight}/>
       </div>
-      <button onClick={() => this.deleteIngredient(ingredient[0])}>x</button>
+      <button  className="btn btn-outline-danger" onClick={() => this.deleteIngredient(ingredient[0])}>X</button>
 
 
         </li>
@@ -170,7 +170,7 @@ render() {
     <li className='list'>
         <div className="card menuitem">
           <div>
-            <input type="text" name='name' value={this.state.name} onChange={this.handleInput}/>
+            <input className='menu-input' type="text" name='name' value={this.state.name} onChange={this.handleInput}/>
           </div>
 
 
@@ -178,24 +178,39 @@ render() {
         <Button variant="warning" onClick={this.handleShow}>
           See Ingredients
         </Button>
-
+        </div>
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Ingredients</Modal.Title>
+            <Modal.Title className='ingredient-title'>Ingredients</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form>
-              <select name="ingredientName" value={this.state.ingredientName} onChange={this.handleNewIngredient} style={{width: '150px'}}>
-                <option>Select an ingredient</option>
-                {this.props.ingredients.map((ingredient) =>
-                  <option key={ingredient.id} value={ingredient.name}>
-                    {ingredient.name}
-                  </option>
-                )};
-              </select>
-              <input type="text" name='ingredientWeight' value={this.state.ingredientWeight} placeholder='Weight in Grams' onChange={this.handleNewIngredient}/>
-              <button type='submit' onClick={this.addIngredient} >Add</button>
-            </form>
+            <Accordion>
+              <Card className='accordion-card'>
+                <Card.Header className='accordion-header'>
+                  <Accordion.Toggle as={Button}  eventKey="0">
+                    <span className='accordion-toggle'>
+                      Add an Ingredient
+                    </span>
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body className='end-of-form'>
+                    <form className='add-ingredient-form'>
+                      <select className='ingredient-dropdown' name="ingredientName" value={this.state.ingredientName} onChange={this.handleNewIngredient}>
+                        <option>Select an ingredient</option>
+                        {this.props.ingredients.map((ingredient) =>
+                          <option key={ingredient.id} value={ingredient.name}>
+                            {ingredient.name}
+                          </option>
+                        )};
+                      </select>
+                      <input type="text" name='ingredientWeight' value={this.state.ingredientWeight} placeholder='Weight in Grams' onChange={this.handleNewIngredient}/>
+                      <button className='add-ingredient' type='submit' onClick={this.addIngredient} >Add</button>
+                    </form>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
             {ingredients}
           </Modal.Body>
           <Modal.Footer>
@@ -204,7 +219,7 @@ render() {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+
     </li>
   )}
 }

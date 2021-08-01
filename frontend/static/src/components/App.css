@@ -84,8 +84,7 @@
 
 .list{
   list-style-type: none;
-  position: relative;
-  display:inline-table;
+  display: inline-table;
   padding: 20px;
 }
 
@@ -94,14 +93,36 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-
+  padding: 10px;
 }
+
+.ingredients-on-menu .btn-outline-danger{
+  height: 30px;
+  margin-left: 10px;
+  line-height: 1em;
+}
+
+.add-ingredient-form{
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
 
 .ingredient-name{
   display: relative;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 15px;
 }
+
 .available-ingredients{
   list-style-type: none;
+}
+
+.ingredient-weight{
+  width: 50px;
 }
 
 
@@ -186,10 +207,10 @@ ul .list:hover button {
 }
 
 .ingredient-title{
+  display: inline-block;
   font-size: 50px;
   font-weight: bold;
-  text-align: center;
-  margin: 20px;
+  margin-left: 35%;
 
 }
 
@@ -275,10 +296,7 @@ label{
 
 }
 
-.ingredient-name{
-  font-weight: bold;
-  text-align: center;
-}
+
 
 .included-ingredients{
   display: flex;
@@ -294,7 +312,6 @@ header{
 }
 
 .foodbook-title{
-
 display: flex;
 justify-content: center;
 margin: 20px;
@@ -307,4 +324,13 @@ font-weight: bold;
   padding: 0px;
   margin: 10px;
   margin-top: 70px;
+}
+
+.menu-input{
+  width: 158px;
+}
+
+.ingredient-dropdown{
+  height: 30px;
+  margin-bottom: 10px;
 }
