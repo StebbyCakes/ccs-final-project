@@ -128,9 +128,31 @@ deleteIngredient(ingredient) {
 
      const ingredients = {...this.state.ingredients};
      ingredients[event.target.name] = event.target.value;
-     this.setState({ingredients});
+        this.setState({ingredients});
 
-   }
+      // clearTimeout(this.timer);
+      //  this.timer = setTimeout(() => {
+      //    this.setState({ingredients});
+      //  }
+      //    const options = {
+      //      method: 'PATCH',
+      //      headers: {
+      //        'Content-Type': 'application/json',
+      //        'X-CSRFToken': Cookies.get('csrftoken')
+      //      },
+      //      body: JSON.stringify({ingredients}),
+      //    }
+      //
+      //   fetch(`/api/v1/menu/${id}/`, options)
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     this.setState({ingredients: json});
+      //   });
+       // }, 1000);
+
+     }
+
+
 
 
 toggleMenuActiveStatus() {

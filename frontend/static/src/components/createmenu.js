@@ -19,7 +19,7 @@ class CreateMenuItem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
-    this.handleImage = this.handleImage.bind(this);
+    // this.handleImage = this.handleImage.bind(this);
     // this.handleIMGSubmit = this.handleIMGSubmit.bind(this);
   }
 
@@ -31,20 +31,20 @@ class CreateMenuItem extends Component {
     }
   }
 
-  handleImage(event){
-    let file = event.target.files[0]
-    this.setState({
-      image: file,
-    })
-    let reader = new FileReader();
-    reader.onloadend = () => {
-      this.setState({
-        preview: reader.result,
-      });
-    }
-
-    reader.readAsDataURL(file);
-  }
+  // handleImage(event){
+  //   let file = event.target.files[0]
+  //   this.setState({
+  //     image: file,
+  //   })
+  //   let reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     this.setState({
+  //       preview: reader.result,
+  //     });
+  //   }
+  //
+  //   reader.readAsDataURL(file);
+  // }
 
   // async handleIMGSubmit(event){
   //   event.preventDefault();
@@ -124,13 +124,13 @@ class CreateMenuItem extends Component {
         <ul className='ingredient-grid'>
           {ingredients}
         </ul>
-        <img className='preview-img' src={defaultImage} alt=""/>
+        { /* <img className='preview-img' src={defaultImage} alt=""/>
           <input type="file" name='menuImg' onChange={this.handleImage}/>
           {this.state.menuImg
           ? <img className='img' src={this.state.preview} alt="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmartialartsplusinc.com%2Fhome%2Fdefault-image%2F&psig=AOvVaw2_wxZFvSEbu5shUuae6NFO&ust=1627012298162000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMj6nbLj9fECFQAAAAAdAAAAABAD"/>
           : null
           }
-
+*/}
 
         </form>
 

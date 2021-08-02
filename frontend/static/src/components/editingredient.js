@@ -42,7 +42,6 @@ class EditIngredient extends Component {
       price_per_pound: parseInt(this.state.new_price_per_pound.replace('.', '')),
     });
 
-    console.log('price_listings', price_listings)
     const ingredient = {
       id,
       is_active,
@@ -67,11 +66,11 @@ class EditIngredient extends Component {
     delete ingredient.price_per_pound;
     delete ingredient.new_price_per_pound;
     delete ingredient.new_start_date;
-    console.log(ingredient);
+
     const current_price_listing = this.findCurrentPriceListing();
-    console.log(current_price_listing);
+
     const index = ingredient.price_listings.indexOf(current_price_listing);
-    console.log(index);
+
     ingredient.price_listings[index].price_per_pound = parseFloat(this.state.price_per_pound) * 100;
     ingredient.price_listings[index].start_date = this.state.start_date;
     this.props.editIngredient(ingredient);

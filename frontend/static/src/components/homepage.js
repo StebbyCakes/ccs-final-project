@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import './App.css';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, LineChart, Area } from 'recharts';
 
 
 const { REACT_APP_SPOONACULAR_API_KEY } = process.env
@@ -29,7 +29,6 @@ class Homepage extends Component {
   }
 
   componentDidMount(){
-    this.fetchJoke();
     this.fetchData();
     this.fetchIngredients();
 
@@ -68,16 +67,15 @@ class Homepage extends Component {
   fetchJoke() {
     const joke = fetch(`https://api.spoonacular.com/food/jokes/random?apiKey=${REACT_APP_SPOONACULAR_API_KEY}`)
     .then((data) => data.json())
-    .then((response) => console.log(response))
+    .then((response) => alert(response.text))
   }
 
   calculateMenuItemCost(menuitem){
     if (this.state.ingredients.length == 0) return 0;
-      const ingredients = Object.entries(menuitem.ingredients); // [[onitions, 2], [tomatoes, 3]]
+      const ingredients = Object.entries(menuitem.ingredients); // [[onions, 2], [tomatoes, 3]]
 
       return ingredients.reduce((sum, ingredient) => {
         const ingredientName = ingredient[0];
-        // console.log('ingredient', ingredient[0])
         const ingredientLb = ingredient[1] * 0.0022046226;
         const ingredientPricePerPound = this.state.ingredients.find(ingredient => ingredient.name === ingredientName).price_listings.price_per_pound;
         const ingredientCost = ingredientLb * (ingredientPricePerPound / 100);
@@ -98,25 +96,28 @@ class Homepage extends Component {
 
   render() {
     const data = [];
-
     const displayMenuItems = this.state.menuitems.map((menuitem) => {
-      menuName = menuitem.name
-      const price = this.calculateMenuItemCost(menuitem);
+      const name = menuitem.name;
+      const price = (menuitem.menu_price / 100);
+      let cost = this.calculateMenuItemCost(menuitem);
+      cost  = parseFloat(cost).toFixed(2);
       data.push({
-        name: menuName,
-        price: price,
-      });
-      newPrice  = parseFloat(price).toFixed(2)
-      return (
+        name,
+        cost,
+        price, // shorthand for price: price
 
+      });
+
+      return (
         <div className='menuCost'>
-        {menuName}
+        {name}
         <h1></h1>
         <p></p>
-        ${newPrice}
+        ${cost}
       </div>
 
     )})
+
     return(
 
       <>
@@ -143,10 +144,36 @@ class Homepage extends Component {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip/>
-          <Bar dataKey="price" fill="#82ca9d" />
+          <Bar dataKey="cost" fill="#82ca9d" />
         </BarChart>
+
+
+<button onClick={this.fetchJoke}>Here</button>
+
+
+
+        <LineChart
+          width={1200}
+          height={500}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Area fill="#82ca9d"  />
+          <Line type="monotone" dataKey="cost" stroke="#82ca9d" />
+        </LineChart>
+
         </div>
       </>
-    )}}
+  )}}
 
 export default Homepage;

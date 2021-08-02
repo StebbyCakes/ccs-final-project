@@ -79,7 +79,7 @@ class MenuItemList extends Component {
   }
 
   fetchIngredients() {
-    const response = fetch('/api/v1/menu/ingredients/').then(data => data.json()).then(json => this.setState({ingredients: json}))
+    const response = fetch('/api/v1/menu/ingredients?active=True/').then(data => data.json()).then(json => this.setState({ingredients: json}))
   }
 
   deleteMenuItem(id) {
