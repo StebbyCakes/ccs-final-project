@@ -334,3 +334,28 @@ font-weight: bold;
   height: 30px;
   margin-bottom: 10px;
 }
+
+footer{
+  background-color: #323232;
+  color: white;
+  /* text-align: center; */
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 0;
+}
+
+footer > * {
+  align-self: center;
+}
+
+.footer-img{
+  opacity: 0%;
+  max-width: 55px;
+  max-height: 55px;
+}
+
+.footer-img:hover{
+  opacity: 100%;
+  cursor: pointer;
+}

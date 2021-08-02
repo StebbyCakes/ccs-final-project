@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import './App.css';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
+import defaultImage from './../assets/images/foodbook.jpeg';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, LineChart, Area } from 'recharts';
 
 
@@ -147,10 +148,7 @@ class Homepage extends Component {
           <Bar dataKey="cost" fill="#82ca9d" />
         </BarChart>
 
-
-<button onClick={this.fetchJoke}>Here</button>
-
-
+  <header>Cost vs Price</header>
 
         <LineChart
           width={1200}
@@ -173,7 +171,13 @@ class Homepage extends Component {
         </LineChart>
 
         </div>
+        <footer>
+          <p className='footer-text'>This is a project was such a blast! I learned so much while building this and I genuinely hope this can be used for restuarants throughout the United States.</p>
+           <p className='footer-name'>Sincerely the creator: Esteban Carter </p>
+            <img onClick={this.fetchJoke} className='footer-img' src={defaultImage}/>
+       </footer>
       </>
+
   )}}
 
 export default Homepage;
