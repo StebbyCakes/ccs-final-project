@@ -20,8 +20,8 @@ class MenuItem(models.Model):
     menu_price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True) # updates at creation
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='menu/', null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    # image = models.ImageField(upload_to='menu/', null=True)
+    # category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name = 'Menu Item'

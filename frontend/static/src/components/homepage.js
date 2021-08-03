@@ -102,11 +102,14 @@ class Homepage extends Component {
       const price = (menuitem.menu_price / 100);
       let cost = this.calculateMenuItemCost(menuitem);
       cost  = parseFloat(cost).toFixed(2);
+      let Profit_Margin = (((price - cost) / price) * 100).toFixed(2);
+
+
       data.push({
         name,
         cost,
         price, // shorthand for price: price
-
+        Profit_Margin,
       });
 
       return (
@@ -166,8 +169,27 @@ class Homepage extends Component {
           <YAxis />
           <Tooltip />
           <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Area fill="#82ca9d"  />
           <Line type="monotone" dataKey="cost" stroke="#82ca9d" />
+        </LineChart>
+
+          <header>Percent Profit per Plate </header>
+
+        <LineChart
+          width={1200}
+          height={500}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="Profit_Margin" stroke="#CF2D1E" activeDot={{ r: 8 }} />
         </LineChart>
 
         </div>
