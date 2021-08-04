@@ -41,7 +41,7 @@ class App extends Component{
     if(response.ok){
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.props.history.push('/ingredientlist')
+      this.props.history.push('/homepage')
     }
   }
 
@@ -62,7 +62,7 @@ class App extends Component{
       const data = await response.json().catch(handleError);
 
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.props.history.push('/ingredientlist')
+      this.props.history.push('/login')
     }
   }
 
