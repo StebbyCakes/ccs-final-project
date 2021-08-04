@@ -356,6 +356,6 @@ footer > * {
 }
 
 .footer-img:hover{
-  opacity: 100%;
+  opacity: 1;
   cursor: pointer;
 }
